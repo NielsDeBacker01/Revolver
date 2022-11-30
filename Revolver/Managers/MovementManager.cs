@@ -13,17 +13,10 @@ namespace Revolver.Managers
             if (gameObject.Movement is not NoMovement)
             {
                 //get input
-                var direction = gameObject.Movement.InputReader.ReadInput();
-
-                //tester
-                KeyboardState state = Keyboard.GetState();
-                if (state.IsKeyDown(Keys.T))
-                {
-                    System.Diagnostics.Debugger.Break();
-                }
+                Vector2 direction = gameObject.Movement.InputReader.ReadInput();
 
                 //time Update
-                if (direction.X == 0)
+                if (direction.X == 0 || direction.X != gameObject.Facing.X)
                 {
                     gameObject.Movement.RunManager.TimeRunning = 0;
                 }
@@ -81,7 +74,7 @@ namespace Revolver.Managers
                     //falling
                     else
                     {
-                        Speed.Y = gameObject.Weight;
+                        Speed.Y = gameObject.Weight * gameObject.Movement.GravityStrength;
                         direction.Y = 1;
                     }
                 }

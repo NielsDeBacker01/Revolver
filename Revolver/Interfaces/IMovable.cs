@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Interfaces;
 using Revolver.Managers;
-using Revolver.Objects;
 using SharpDX.Direct2D1;
 using System.Collections.Generic;
 using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;

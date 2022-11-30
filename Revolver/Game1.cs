@@ -19,6 +19,7 @@ namespace Revolver
         private Texture2D _banditTexture;
         private Texture2D _blokTexture;
         private Texture2D _bulletTexture;
+        private Texture2D _gunTexture;
         private Player player;
         private List<IMovable> gameObjects;
 
@@ -43,7 +44,7 @@ namespace Revolver
             gameObjects.Add(new Cactus(_cactusTexture, new Vector2(180, 450)));
             gameObjects.Add(new Cactus(_cactusTexture, new Vector2(600, 375)));
             gameObjects.Add(new Bandit(_banditTexture, new Vector2(400, 200), player));
-
+            gameObjects.Add(new Gun(_gunTexture, new Vector2(100,400)));
         }
 
         protected override void LoadContent()
@@ -56,6 +57,7 @@ namespace Revolver
             _cactusTexture = _blokTexture;
             _banditTexture = _blokTexture;
             _bulletTexture = _blokTexture;
+            _gunTexture = _blokTexture;
         }
 
         protected override void Update(GameTime gameTime)
@@ -70,6 +72,13 @@ namespace Revolver
                 gObject.Update(gameTime, gameObjects);
             }
             base.Update(gameTime);
+
+            //tester
+            KeyboardState state = Keyboard.GetState();
+            if (state.IsKeyDown(Keys.T))
+            {
+                System.Diagnostics.Debugger.Break();
+            }
         }
 
         protected override void Draw(GameTime gameTime)

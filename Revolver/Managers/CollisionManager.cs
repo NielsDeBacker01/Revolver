@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Revolver.Controls.Movement;
 using Revolver.Interface;
 using Revolver.Objects;
 using System;
@@ -19,6 +20,11 @@ namespace Revolver.Managers
                 if (gameObject != gObject)
                 {
                     movement += ApplyCollision(gameObject, movement, gObject);
+                }
+                // checks if gameObject was frozen due to a interaction -> other NoMovement gameobjects already got filtered in movementManager
+                if (gameObject.Movement is NoMovement)
+                {
+                    return Vector2.Zero;
                 }
             }
             return movement;

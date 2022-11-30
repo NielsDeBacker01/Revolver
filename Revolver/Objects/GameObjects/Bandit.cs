@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Revolver.Objects.GameObjects
 {
-    internal class Bandit : IMovable, IShoot
+    internal class Bandit : IMovable
     {
         public Texture2D Texture { get; set; }
         public IMovement Movement { get; set; }
@@ -47,7 +47,7 @@ namespace Revolver.Objects.GameObjects
             Hitboxes = new List<Hitbox>();
             Hitboxes.Add(new Hitbox(30, 30, new Vector2(0, 0), texture));
             Hitboxes.Add(new Hitbox(20, 10, new Vector2(20, 10), texture));
-            ShootCooldown = 0;
+            ShootCooldown = 1;
         }
 
         public void Update(GameTime gameTime, List<IMovable> gameObjects)

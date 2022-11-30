@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Interface;
-using Revolver.Interfaces;
+using Revolver.Objects;
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
@@ -9,13 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Revolver.Objects
+namespace Revolver.Interfaces
 {
     internal interface IObject
     {
         Texture2D Texture { get; set; }
         public Vector2 MinPosition { get; set; }
-        public Vector2 MaxPosition 
+        public Vector2 MaxPosition
         {
             get { return MinPosition + new Vector2(Width, Height); }
             set { MinPosition = value - new Vector2(Width, Height); }

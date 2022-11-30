@@ -2,14 +2,14 @@
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Controls;
 using Revolver.Controls.Movement;
+using Revolver.Controls.Reader;
 using Revolver.Interface;
 using Revolver.Interfaces;
-using Revolver.Objects;
 using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
 {
-    internal class Player : IMovable
+    internal class Gun : IMovable
     {
         public Texture2D Texture { get; set; }
         public IMovement Movement { get; set; }
@@ -24,37 +24,34 @@ namespace Revolver.Objects.GameObjects
         public int Width { get; set; }
         public int Height { get; set; }
         public int Weight { get; set; }
+        public IMovable GunContent { get; set; }
 
-        public Player(Texture2D texture)
+
+        public Gun(Texture2D texture, Vector2 position)
         {
-            Movement = new PlayerMovement();
-            MinPosition = new Vector2(1, 1);
+            Movement = new NoMovement();
             Texture = texture;
-            Facing = new Vector2(1, 0);
+            Facing = new Vector2(0, 0);
             Width = 30;
             Height = 30;
-            Weight = 10;
+            MinPosition = position;
+            Weight = 0;
             Hitboxes = new List<Hitbox>();
-            Hitboxes.Add(new Hitbox(20, 10, new Vector2(10, 20), texture));
-            Hitboxes.Add(new Hitbox(20, 10, new Vector2(20, 10), texture));
-            Hitboxes.Add(new Hitbox(10, 10, new Vector2(10, -10), texture));
+            Hitboxes.Add(new Hitbox(30, 10, new Vector2(0, 10), texture));
+            Hitboxes.Add(new Hitbox(10, 30, new Vector2(10, 0), texture)); 
         }
 
         public int Interaction(IMovable gameObject)
         {
-            if (gameObject is Cactus || gameObject is Bandit || gameObject is Bullet)
-            {
-                MinPosition = new Vector2(1, 1);
-                Movement.ResetMovement();
-                return 0;
-            }
-            if(gameObject is Gun)
-            {
-                Gun gun = gameObject as Gun;
-                gun.Load(this);
-                return 0;
-            }
-            return 1;
+            return 0;
+        }
+
+        public void Load(IMovable gameObject)
+        {
+            this.GunContent = gameObject;
+            this.GunContent.Movement = new NoMovement();
+            this.GunContent.Movement.InputReader = new KeyboardReader();
+            this.GunContent.MinPosition = new Vector2(100, 400);
         }
     }
 }

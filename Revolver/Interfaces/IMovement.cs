@@ -10,6 +10,7 @@ namespace Revolver.Interfaces
         public IInputReader InputReader { get; set; }
         public IJump JumpManager { get; set; }
         public IRun RunManager { get; set; }
+        public int GravityStrength { get; set; }
         public void ResetMovement();
     }
 }

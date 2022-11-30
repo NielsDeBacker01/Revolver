@@ -18,12 +18,14 @@ namespace Revolver.Controls.Movement
         public IInputReader InputReader { get; set; }
         public IJump JumpManager { get; set; }
         public IRun RunManager { get; set; }
+        public int GravityStrength { get; set; }
         public NoMovement()
         {
             InputReader = new EmptyReader();
             JumpManager = new NoJump();
             RunManager = new NoRun();
             MovementManager = new MovementManager();
+            GravityStrength = 0;
         }
         public void ResetMovement()
         {

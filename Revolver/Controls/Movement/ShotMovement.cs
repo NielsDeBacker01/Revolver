@@ -19,18 +19,21 @@ namespace Revolver.Controls.Movement
         public IInputReader InputReader { get; set; }
         public IJump JumpManager { get; set; }
         public IRun RunManager { get; set; }
+        public int GravityStrength { get; set; }
         public ShotMovement(Vector2 direction)
         {
             InputReader = new ConstantReader(direction);
             JumpManager = new NoJump();
             RunManager = new StandardRun(10, 10f, 0f);
             MovementManager = new MovementManager();
+            GravityStrength = 0;
         }
         public void ResetMovement()
         {
             JumpManager.AirTime = 0;
             RunManager.TimeRunning = 0;
             JumpManager.IsJumping = false;
+            GravityStrength = 0;
         }
     }
 }

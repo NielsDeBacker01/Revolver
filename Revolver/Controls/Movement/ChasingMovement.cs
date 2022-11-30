@@ -19,18 +19,21 @@ namespace Revolver.Controls.Movement
         public IInputReader InputReader { get; set; }
         public IJump JumpManager { get; set; }
         public IRun RunManager { get; set; }
+        public int GravityStrength { get; set; }
         public ChasingMovement(IMovable self, IMovable tracker)
         {
             InputReader = new AiReader(self, tracker);
             JumpManager = new NoJump();
             RunManager = new StandardRun(3, 4f, 0.1f);
             MovementManager = new MovementManager();
+            GravityStrength = 1;
         }
         public void ResetMovement()
         {
             JumpManager.AirTime = 0;
             RunManager.TimeRunning = 0;
             JumpManager.IsJumping = false;
+            GravityStrength = 1;
         }
     }
 }
