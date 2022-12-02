@@ -18,9 +18,13 @@ namespace Revolver.Controls.Reader
             {
                 direction.X += 1;
             }
-            if (state.IsKeyDown(Keys.Space))
+            if (state.IsKeyDown(Keys.Space) || state.IsKeyDown(Keys.Up))
             {
                 direction.Y += -1;
+            }
+            if (state.IsKeyDown(Keys.Down))
+            {
+                direction.Y += 1;
             }
             return direction;
         }

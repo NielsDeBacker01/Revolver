@@ -5,6 +5,7 @@ using Revolver.Controls.Movement;
 using Revolver.Controls.Reader;
 using Revolver.Interface;
 using Revolver.Interfaces;
+using Revolver.Managers;
 using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
@@ -39,6 +40,31 @@ namespace Revolver.Objects.GameObjects
             Hitboxes = new List<Hitbox>();
             Hitboxes.Add(new Hitbox(30, 10, new Vector2(0, 10), texture));
             Hitboxes.Add(new Hitbox(10, 30, new Vector2(10, 0), texture)); 
+        }
+        public void Update(GameTime gameTime, List<IMovable> gameObjects)
+        {
+            MovementManager.Move(this, gameTime, gameObjects);
+            foreach (var hitbox in Hitboxes) {hitbox.Flip(this);}
+            if(GunContent != null)
+            {
+                Vector2 direction = GunContent.Movement.InputReader.ReadInput();
+                if (direction != Vector2.Zero)
+                {   
+                    if(direction.Y == 0 || direction.X == 0)
+                    {
+                        GunContent.Movement = new ShotMovement(direction);
+                    } 
+                    else
+                    {
+                        GunContent.Movement = new ShotMovement(new Vector2(direction.X, 0));
+                    }
+                }
+                if (CollisionManager.IsColliding(GunContent, gameObjects))
+                {
+                    GunContent.Movement = new PlayerMovement();
+                    GunContent = null;
+                }
+            }
         }
 
         public int Interaction(IMovable gameObject)

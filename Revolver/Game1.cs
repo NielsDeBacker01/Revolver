@@ -40,7 +40,7 @@ namespace Revolver
             gameObjects = new List<IMovable>();
             gameObjects.Add(player);
             gameObjects.Add(new Cactus(_cactusTexture, new Vector2(150, 450)));
-            gameObjects.Add(new Cactus(_cactusTexture, new Vector2(100, 300)));
+            gameObjects.Add(new Cactus(_cactusTexture, new Vector2(150, 100)));
             gameObjects.Add(new Cactus(_cactusTexture, new Vector2(180, 450)));
             gameObjects.Add(new Cactus(_cactusTexture, new Vector2(600, 375)));
             gameObjects.Add(new Bandit(_banditTexture, new Vector2(400, 200), player));

@@ -24,7 +24,7 @@ namespace Revolver.Controls.Movement
         {
             InputReader = new AiReader(self, tracker);
             JumpManager = new NoJump();
-            RunManager = new StandardRun(3, 4f, 0.1f);
+            RunManager = new Standard2DRun(3, 4f, 0.1f);
             MovementManager = new MovementManager();
             GravityStrength = 1;
         }

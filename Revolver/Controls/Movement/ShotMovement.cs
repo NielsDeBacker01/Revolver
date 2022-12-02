@@ -24,7 +24,7 @@ namespace Revolver.Controls.Movement
         {
             InputReader = new ConstantReader(direction);
             JumpManager = new NoJump();
-            RunManager = new StandardRun(10, 10f, 0f);
+            RunManager = new quadDirectionalRun(10, 10f, 0f);
             MovementManager = new MovementManager();
             GravityStrength = 0;
         }

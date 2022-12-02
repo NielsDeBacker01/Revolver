@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Revolver.Controls.Movement;
+using Revolver.Controls.Run;
 using Revolver.Interface;
 using System.Collections.Generic;
 
@@ -46,37 +47,45 @@ namespace Revolver.Managers
                 Speed.X = gameObject.Movement.RunManager.CalculateRun();
 
                 //jump logic
-                if (CollisionManager.IsTouchingGround(gameObject))
+                if (gameObject.Movement.RunManager is  not quadDirectionalRun)
                 {
-                    //startsJump
-                    if (direction.Y == -1)
+                    //normal jump calculation
+                    if (CollisionManager.IsTouchingGround(gameObject))
                     {
-                        Speed.Y = gameObject.Movement.JumpManager.CalculateJump() * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        gameObject.Movement.JumpManager.IsJumping = true;
-                    }
+                        //startsJump
+                        if (direction.Y == -1)
+                        {
+                            Speed.Y = gameObject.Movement.JumpManager.CalculateJump() * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                            gameObject.Movement.JumpManager.IsJumping = true;
+                        }
 
-                    //onGround
+                        //onGround
+                        else
+                        {
+                            Speed.Y = 0;
+                            gameObject.Movement.JumpManager.IsJumping = false;
+                        }
+                    }
                     else
                     {
-                        Speed.Y = 0;
-                        gameObject.Movement.JumpManager.IsJumping = false;
-                    }
-                }
-                else
-                {
-                    //jumping
-                    if (gameObject.Movement.JumpManager.IsJumping)
-                    {
-                        Speed.Y = gameObject.Movement.JumpManager.CalculateJump() * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                        direction.Y = -1;
-                    }
+                        //jumping
+                        if (gameObject.Movement.JumpManager.IsJumping)
+                        {
+                            Speed.Y = gameObject.Movement.JumpManager.CalculateJump() * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                            direction.Y = -1;
+                        }
 
-                    //falling
-                    else
-                    {
-                        Speed.Y = gameObject.Weight * gameObject.Movement.GravityStrength;
-                        direction.Y = 1;
+                        //falling
+                        else
+                        {
+                            Speed.Y = gameObject.Weight * gameObject.Movement.GravityStrength;
+                            direction.Y = 1;
+                        }
                     }
+                } else
+                {
+                    //alternate quadDirectionalRun
+                    Speed.Y = gameObject.Movement.RunManager.CalculateRun();
                 }
 
                 //result

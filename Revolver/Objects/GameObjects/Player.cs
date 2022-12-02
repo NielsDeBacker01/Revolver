@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Revolver.Controls;
 using Revolver.Controls.Movement;
 using Revolver.Interface;
@@ -48,7 +49,17 @@ namespace Revolver.Objects.GameObjects
                 Movement.ResetMovement();
                 return 0;
             }
-            if(gameObject is Gun)
+
+            if (this.Movement is ShotMovement)
+            {
+                if (gameObject is Gun)
+                {
+                    return 0;
+                }
+                return 1;
+            }
+
+            if (gameObject is Gun)
             {
                 Gun gun = gameObject as Gun;
                 gun.Load(this);
