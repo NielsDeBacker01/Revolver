@@ -9,7 +9,7 @@ namespace Revolver.Managers
 {
     internal class MovementManager
     {
-        public static void Move(IMovable gameObject, GameTime gameTime, List<IMovable> gameObjects)
+        public static void Move(IMovable gameObject, GameTime gameTime)
         {
             Vector2 afstand = Vector2.Zero ;
             if (gameObject.Movement is not NoMovement)
@@ -93,7 +93,7 @@ namespace Revolver.Managers
                 afstand = direction * Speed;
             }
             //collissionChecks
-            afstand = CollisionManager.MovementCollisionChecks(gameObject, afstand, gameObjects);
+            afstand = CollisionManager.MovementCollisionChecks(gameObject, afstand, GameStateManager.gameObjects);
 
             //apply result
             gameObject.MinPosition += afstand;

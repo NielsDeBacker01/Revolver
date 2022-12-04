@@ -23,10 +23,12 @@ namespace Revolver.Objects.GameObjects
         public int Width { get; set; }
         public int Height { get; set; }
         public int Weight { get; set; }
-
+        public List<Tag> Tags { get; set; }
 
         public Cactus(Texture2D texture, Vector2 position)
         {
+            Tags = new List<Tag>();
+            Tags.Add(Tag.Deadly);
             Movement = new NoMovement();
             Texture = texture;
             Facing = new Vector2(0, 0);

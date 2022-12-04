@@ -5,6 +5,7 @@ using Revolver.Controls;
 using Revolver.Controls.Movement;
 using Revolver.Interface;
 using Revolver.Interfaces;
+using Revolver.Managers;
 using Revolver.Objects;
 using System.Collections.Generic;
 
@@ -25,9 +26,13 @@ namespace Revolver.Objects.GameObjects
         public int Width { get; set; }
         public int Height { get; set; }
         public int Weight { get; set; }
+        public List<Tag> Tags { get; set; }
 
         public Player(Texture2D texture)
         {
+            Tags = new List<Tag>();
+            Tags.Add(Tag.Mortal);
+            Tags.Add(Tag.Loadable);
             Movement = new PlayerMovement();
             MinPosition = new Vector2(1, 1);
             Texture = texture;
@@ -41,9 +46,33 @@ namespace Revolver.Objects.GameObjects
             Hitboxes.Add(new Hitbox(10, 10, new Vector2(10, -10), texture));
         }
 
+        public void Update(GameTime gameTime)
+        {
+            MovementManager.Move(this, gameTime);
+            foreach (var hitbox in Hitboxes) { hitbox.Flip(this); }
+
+            if (this.Tags.Contains(Tag.Deadly) && CollisionManager.IsCollidingWithBoundaries(this))
+            {
+                this.Movement = new PlayerMovement();
+                this.Tags.Add(Tag.Loadable);
+                this.Tags.Remove(Tag.Deadly);
+            }
+        }
+
         public bool Interaction(IMovable gameObject)
         {
-            if (gameObject is Cactus || gameObject is Bandit || gameObject is Bullet)
+            if (this.Tags.Contains(Tag.Deadly) && gameObject is not Gun)
+            {
+                if (gameObject.Tags.Contains(Tag.Mortal))
+                {
+                }
+                this.Movement = new PlayerMovement();
+                this.Tags.Add(Tag.Loadable);
+                this.Tags.Remove(Tag.Deadly);
+            }
+
+
+            if (gameObject.Tags.Contains(Tag.Deadly))
             {
                 MinPosition = new Vector2(1, 1);
                 Movement.ResetMovement();

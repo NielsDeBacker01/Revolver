@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Revolver.Interface;
 using Revolver.Interfaces;
+using Revolver.Managers;
 using Revolver.Objects;
 using Revolver.Objects.GameObjects;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Linq;
 
 namespace Revolver
 {
+    public enum Tag { Mortal, Deadly, Loadable}
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -20,7 +22,6 @@ namespace Revolver
         private Texture2D _blokTexture;
         private Texture2D _bulletTexture;
         private Texture2D _gunTexture;
-        private List<IMovable> gameObjects;
 
         public Game1()
         {
@@ -34,14 +35,15 @@ namespace Revolver
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            gameObjects = new List<IMovable>();
-            gameObjects.Add(new Player(_playerTexture));
-            gameObjects.Add(new Cactus(_cactusTexture, new Vector2(150, 450)));
-            gameObjects.Add(new Cactus(_cactusTexture, new Vector2(150, 100)));
-            gameObjects.Add(new Cactus(_cactusTexture, new Vector2(180, 450)));
-            gameObjects.Add(new Cactus(_cactusTexture, new Vector2(600, 375)));
-            gameObjects.Add(new Bandit(_banditTexture, new Vector2(400, 200), gameObjects));
-            gameObjects.Add(new Gun(_gunTexture, new Vector2(100,400)));
+            GameStateManager.gameObjects = new List<IMovable>();
+            GameStateManager.gameObjects.Add(new Player(_playerTexture));
+            GameStateManager.gameObjects.Add(new Cactus(_cactusTexture, new Vector2(150, 450)));
+            GameStateManager.gameObjects.Add(new Cactus(_cactusTexture, new Vector2(150, 100)));
+            GameStateManager.gameObjects.Add(new Cactus(_cactusTexture, new Vector2(180, 450)));
+            GameStateManager.gameObjects.Add(new Cactus(_cactusTexture, new Vector2(600, 375)));
+            GameStateManager.gameObjects.Add(new Bandit(_banditTexture, new Vector2(400, 200)));
+            GameStateManager.gameObjects.Add(new Gun(_gunTexture, new Vector2(100,400)));
+            GameStateManager.gameObjects.Add(new Gun(_gunTexture, new Vector2(450, 400)));
         }
 
         protected override void LoadContent()
@@ -63,10 +65,10 @@ namespace Revolver
                 Exit();
 
             // TODO: Add your update logic here
-            foreach (IMovable gObject in gameObjects.ToList())
+            foreach (IMovable gObject in GameStateManager.gameObjects.ToList())
             {
                 //handeld by IGameObject
-                gObject.Update(gameTime, gameObjects);
+                gObject.Update(gameTime);
             }
             base.Update(gameTime);
 
@@ -82,7 +84,7 @@ namespace Revolver
         {
             GraphicsDevice.Clear(Color.Honeydew);
             _spriteBatch.Begin();
-            foreach (IMovable gObject in gameObjects)
+            foreach (IMovable gObject in GameStateManager.gameObjects)
             {
                 //handeld by IGameObject
                 gObject.Draw(_spriteBatch);

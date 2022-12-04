@@ -27,10 +27,13 @@ namespace Revolver.Objects.GameObjects
         public int Width { get; set; }
         public int Height { get; set; }
         public int Weight { get; set; }
+        public List<Tag> Tags { get; set; }
         public IMovable Origin;
 
         public Bullet(Texture2D texture, Vector2 position, Vector2 facing, IMovable origin)
         {
+            Tags = new List<Tag>();
+            Tags.Add(Tag.Deadly);
             Texture = texture;
             MinPosition = position;
             Width = 10;

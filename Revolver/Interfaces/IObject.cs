@@ -24,6 +24,7 @@ namespace Revolver.Interfaces
         public List<Hitbox> Hitboxes { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+        public List<Tag> Tags { get; set; }
         void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, MinPosition, new Rectangle(0, 0, Width, Height), Color.Red);

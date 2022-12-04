@@ -31,10 +31,14 @@ namespace Revolver.Objects.GameObjects
         public int Height { get; set; }
         public int Weight { get; set; }
         public float ShootCooldown { get; set; }
+        public List<Tag> Tags { get; set; }
 
-        public Bandit(Texture2D texture, Vector2 position, List<IMovable> gameObjects)
+        public Bandit(Texture2D texture, Vector2 position)
         {
-            foreach(IMovable gObject in gameObjects)
+            Tags = new List<Tag>();
+            Tags.Add(Tag.Deadly);
+            Tags.Add(Tag.Mortal);
+            foreach (IMovable gObject in GameStateManager.gameObjects)
             {
                 if(gObject is Player)
                 {
@@ -57,19 +61,19 @@ namespace Revolver.Objects.GameObjects
             ShootCooldown = 1;
         }
 
-        public void Update(GameTime gameTime, List<IMovable> gameObjects)
+        public void Update(GameTime gameTime)
         {
-            MovementManager.Move(this, gameTime, gameObjects);
+            MovementManager.Move(this, gameTime);
             foreach (var hitbox in Hitboxes) { hitbox.Flip(this); }
             //update bullet list
-            foreach (IMovable test in gameObjects.ToList())
+            foreach (IMovable test in GameStateManager.gameObjects.ToList())
             {
                 if(test is Bullet)
                 {
                     Bullet bullet = test as Bullet;
-                    if (bullet.Origin == this && CollisionManager.IsColliding(bullet, gameObjects))
+                    if (bullet.Origin == this && CollisionManager.IsColliding(bullet, GameStateManager.gameObjects))
                     {
-                        gameObjects.Remove(bullet);
+                        GameStateManager.gameObjects.Remove(bullet);
                     }
                 }
             }
@@ -77,13 +81,14 @@ namespace Revolver.Objects.GameObjects
             ShootCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (ShootCooldown <= 0)
             {
-                gameObjects.Add(new Bullet(Texture, this.MinPosition + new Vector2(0, Height/2), this.Facing, this));
+                GameStateManager.gameObjects.Add(new Bullet(Texture, this.MinPosition + new Vector2(0, Height/2), this.Facing, this));
                 ShootCooldown = 1;
             }
         }
 
         public bool Interaction(IMovable gameObject)
         {
+
             if (gameObject is Bullet)
             {
                 Bullet originTest = gameObject as Bullet;

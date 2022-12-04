@@ -12,8 +12,8 @@ namespace Revolver.Interface
     {
         public IMovement Movement { get; set; }
         public int Weight { get; set; }
-        public void Update(GameTime gameTime, List<IMovable> gameObjects) 
-        { MovementManager.Move(this, gameTime, gameObjects); 
+        public void Update(GameTime gameTime) 
+        { MovementManager.Move(this, gameTime); 
           foreach (var hitbox in Hitboxes) {hitbox.Flip(this);}}
         bool Interaction(IMovable gameObject);
     }
