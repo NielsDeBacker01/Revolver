@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Revolver.Objects.GameObjects
 {
@@ -31,14 +32,20 @@ namespace Revolver.Objects.GameObjects
         public int Weight { get; set; }
         public float ShootCooldown { get; set; }
 
-        public Bandit(Texture2D texture, Vector2 position, IMovable player = null)
+        public Bandit(Texture2D texture, Vector2 position, List<IMovable> gameObjects)
         {
-            if (player == null || player is not Player)
+            foreach(IMovable gObject in gameObjects)
             {
-                player = this;
+                if(gObject is Player)
+                {
+                    Movement = new ChasingMovement(this, gObject);
+                }
+            }
+            if(Movement == null)
+            {
+                Movement = new ChasingMovement(this, this);
             }
             Texture = texture;
-            Movement = new ChasingMovement(this, player);
             MinPosition = position;
             Facing = new Vector2(1, 0);
             Width = 30;
@@ -75,17 +82,17 @@ namespace Revolver.Objects.GameObjects
             }
         }
 
-        public int Interaction(IMovable gameObject)
+        public bool Interaction(IMovable gameObject)
         {
             if (gameObject is Bullet)
             {
                 Bullet originTest = gameObject as Bullet;
                 if(originTest.Origin == this)
                 {
-                    return 0;
+                    return false;
                 }
             }
-            return 1;
+            return true;
         }
     }
 }

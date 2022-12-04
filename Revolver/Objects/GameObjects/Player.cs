@@ -41,31 +41,21 @@ namespace Revolver.Objects.GameObjects
             Hitboxes.Add(new Hitbox(10, 10, new Vector2(10, -10), texture));
         }
 
-        public int Interaction(IMovable gameObject)
+        public bool Interaction(IMovable gameObject)
         {
             if (gameObject is Cactus || gameObject is Bandit || gameObject is Bullet)
             {
                 MinPosition = new Vector2(1, 1);
                 Movement.ResetMovement();
-                return 0;
-            }
-
-            if (this.Movement is ShotMovement)
-            {
-                if (gameObject is Gun)
-                {
-                    return 0;
-                }
-                return 1;
+                return false;
             }
 
             if (gameObject is Gun)
             {
-                Gun gun = gameObject as Gun;
-                gun.Load(this);
-                return 0;
+                return false;
             }
-            return 1;
+
+            return true;
         }
     }
 }

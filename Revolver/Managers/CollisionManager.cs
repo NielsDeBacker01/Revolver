@@ -77,37 +77,39 @@ namespace Revolver.Managers
                         {
                             if ((y2 <= y1 && y1 <= y2 + hitbox2.Box.Height) || (y2 < y1 + hitbox1.Box.Height && y1 + hitbox1.Box.Height < y2 + hitbox2.Box.Height))
                             {
-                                correction = Vector2.Zero;
-                                //left approach
-                                if (x1 - movement.X + hitbox1.Box.Width <= x2)
-                                { 
-                                    correction.X = hitbox1.Box.Width + x2 - x1;
-                                }
-                                //right approach
-                                else if (x2 + hitbox2.Box.Width <= x1 - movement.X)
+                                if (g1.Interaction(g2))
                                 {
-                                    correction.X = x2 + hitbox2.Box.Width - x1;
-                                }
+                                    correction = Vector2.Zero;
+                                    //left approach
+                                    if (x1 - movement.X + hitbox1.Box.Width <= x2)
+                                    {
+                                        correction.X = hitbox1.Box.Width + x2 - x1;
+                                    }
+                                    //right approach
+                                    else if (x2 + hitbox2.Box.Width <= x1 - movement.X)
+                                    {
+                                        correction.X = x2 + hitbox2.Box.Width - x1;
+                                    }
 
-                                //top approach
-                                if (y1 - movement.Y <= y2)
-                                {
-                                    correction.Y = hitbox1.Box.Height + y2 - y1;
-                                }
-                                //bottom approach
-                                else if (y2 + hitbox2.Box.Height <= y1 - movement.Y)
-                                {
-                                    correction.Y = y2 + hitbox2.Box.Height - y1;
-                                }
+                                    //top approach
+                                    if (y1 - movement.Y <= y2)
+                                    {
+                                        correction.Y = hitbox1.Box.Height + y2 - y1;
+                                    }
+                                    //bottom approach
+                                    else if (y2 + hitbox2.Box.Height <= y1 - movement.Y)
+                                    {
+                                        correction.Y = y2 + hitbox2.Box.Height - y1;
+                                    }
 
-                                correction *= g1.Interaction(g2);
-                                if (Math.Abs(correction.X) > Math.Abs(greatestCorrection.X))
-                                {
-                                    greatestCorrection.X = correction.X;
-                                }
-                                if (Math.Abs(correction.Y) > Math.Abs(greatestCorrection.Y))
-                                {
-                                    greatestCorrection.Y = correction.Y;
+                                    if (Math.Abs(correction.X) > Math.Abs(greatestCorrection.X))
+                                    {
+                                        greatestCorrection.X = correction.X;
+                                    }
+                                    if (Math.Abs(correction.Y) > Math.Abs(greatestCorrection.Y))
+                                    {
+                                        greatestCorrection.Y = correction.Y;
+                                    }
                                 }
                             }
                         }
@@ -173,7 +175,7 @@ namespace Revolver.Managers
                 {
                     if (IsCollidingWithObject(updatedGameObject,gObject))
                     {
-                        if (updatedGameObject.Interaction(gObject) == 1)
+                        if (updatedGameObject.Interaction(gObject))
                         {
                             return true;
                         }

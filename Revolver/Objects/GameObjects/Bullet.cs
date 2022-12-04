@@ -42,13 +42,13 @@ namespace Revolver.Objects.GameObjects
             Origin = origin;
         }
 
-        public int Interaction(IMovable gameObject)
+        public bool Interaction(IMovable gameObject)
         {
             if (gameObject == Origin || gameObject is Player)
             {
-                return 0;
+                return false;
             }
-            return 1;
+            return true;
         }
     }
 }

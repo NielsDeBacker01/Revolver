@@ -38,9 +38,9 @@ namespace Revolver.Objects.GameObjects
             Hitboxes.Add(new Hitbox(30, 30, new Vector2(0, 0), texture));
         }
 
-        public int Interaction(IMovable gameObject)
+        public bool Interaction(IMovable gameObject)
         {
-            return 1;
+            return true;
         }
     }
 }

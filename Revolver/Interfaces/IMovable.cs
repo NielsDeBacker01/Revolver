@@ -15,6 +15,6 @@ namespace Revolver.Interface
         public void Update(GameTime gameTime, List<IMovable> gameObjects) 
         { MovementManager.Move(this, gameTime, gameObjects); 
           foreach (var hitbox in Hitboxes) {hitbox.Flip(this);}}
-        int Interaction(IMovable gameObject);
+        bool Interaction(IMovable gameObject);
     }
 }

@@ -7,6 +7,7 @@ using Revolver.Interface;
 using Revolver.Interfaces;
 using Revolver.Managers;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 
 namespace Revolver.Objects.GameObjects
 {
@@ -26,7 +27,7 @@ namespace Revolver.Objects.GameObjects
         public int Height { get; set; }
         public int Weight { get; set; }
         public IMovable GunContent { get; set; }
-
+        public float ShootCooldown { get; set; }
 
         public Gun(Texture2D texture, Vector2 position)
         {
@@ -43,33 +44,41 @@ namespace Revolver.Objects.GameObjects
         }
         public void Update(GameTime gameTime, List<IMovable> gameObjects)
         {
+            ShootCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             MovementManager.Move(this, gameTime, gameObjects);
             foreach (var hitbox in Hitboxes) {hitbox.Flip(this);}
             if(GunContent != null)
             {
                 Vector2 direction = GunContent.Movement.InputReader.ReadInput();
-                if (direction != Vector2.Zero)
+                if (direction != Vector2.Zero && ShootCooldown <= 0)
                 {   
+                    //shoot content
                     if(direction.Y == 0 || direction.X == 0)
                     {
-                        GunContent.Movement = new ShotMovement(direction);
+                       GunContent.Movement = new ShotMovement(direction);
                     } 
                     else
                     {
                         GunContent.Movement = new ShotMovement(new Vector2(direction.X, 0));
                     }
+                    GunContent = null;
                 }
                 if (CollisionManager.IsColliding(GunContent, gameObjects))
                 {
                     GunContent.Movement = new PlayerMovement();
-                    GunContent = null;
                 }
             }
+
+            
         }
 
-        public int Interaction(IMovable gameObject)
+        public bool Interaction(IMovable gameObject)
         {
-            return 0;
+            if(this.GunContent == null)
+            {
+                Load(gameObject);
+            }
+            return false;
         }
 
         public void Load(IMovable gameObject)
@@ -78,6 +87,7 @@ namespace Revolver.Objects.GameObjects
             this.GunContent.Movement = new NoMovement();
             this.GunContent.Movement.InputReader = new KeyboardReader();
             this.GunContent.MinPosition = new Vector2(100, 400);
+            this.ShootCooldown = 0.15f;
         }
     }
 }

@@ -20,7 +20,6 @@ namespace Revolver
         private Texture2D _blokTexture;
         private Texture2D _bulletTexture;
         private Texture2D _gunTexture;
-        private Player player;
         private List<IMovable> gameObjects;
 
         public Game1()
@@ -35,15 +34,13 @@ namespace Revolver
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            player = new Player(_playerTexture);
-
             gameObjects = new List<IMovable>();
-            gameObjects.Add(player);
+            gameObjects.Add(new Player(_playerTexture));
             gameObjects.Add(new Cactus(_cactusTexture, new Vector2(150, 450)));
             gameObjects.Add(new Cactus(_cactusTexture, new Vector2(150, 100)));
             gameObjects.Add(new Cactus(_cactusTexture, new Vector2(180, 450)));
             gameObjects.Add(new Cactus(_cactusTexture, new Vector2(600, 375)));
-            gameObjects.Add(new Bandit(_banditTexture, new Vector2(400, 200), player));
+            gameObjects.Add(new Bandit(_banditTexture, new Vector2(400, 200), gameObjects));
             gameObjects.Add(new Gun(_gunTexture, new Vector2(100,400)));
         }
 
