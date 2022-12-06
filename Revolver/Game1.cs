@@ -2,16 +2,14 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Revolver.Interface;
-using Revolver.Interfaces;
 using Revolver.Managers;
-using Revolver.Objects;
 using Revolver.Objects.GameObjects;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Revolver
 {
-    public enum Tag { Mortal, Deadly, Loadable}
+    public enum Tag { Mortal, Deadly, Loadable }
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -36,14 +34,15 @@ namespace Revolver
 
             base.Initialize();
             GameStateManager.gameObjects = new List<IMovable>();
-            GameStateManager.gameObjects.Add(new Player(_playerTexture));
-            GameStateManager.gameObjects.Add(new Cactus(_cactusTexture, new Vector2(150, 450)));
-            GameStateManager.gameObjects.Add(new Cactus(_cactusTexture, new Vector2(150, 100)));
-            GameStateManager.gameObjects.Add(new Cactus(_cactusTexture, new Vector2(180, 450)));
-            GameStateManager.gameObjects.Add(new Cactus(_cactusTexture, new Vector2(600, 375)));
-            GameStateManager.gameObjects.Add(new Bandit(_banditTexture, new Vector2(400, 200)));
-            GameStateManager.gameObjects.Add(new Gun(_gunTexture, new Vector2(100,400)));
-            GameStateManager.gameObjects.Add(new Gun(_gunTexture, new Vector2(450, 400)));
+            new Player(_playerTexture);
+            new Cactus(_cactusTexture, new Vector2(150, 450));
+            new Cactus(_cactusTexture, new Vector2(450, 0));
+            new Cactus(_cactusTexture, new Vector2(180, 450));
+            new Cactus(_cactusTexture, new Vector2(600, 375));
+            new Bandit(_banditTexture, new Vector2(400, 200));
+            new Gun(_gunTexture, new Vector2(120, 400));
+            new Gun(_gunTexture, new Vector2(120, 50));
+            new Gun(_gunTexture, new Vector2(450, 50));
         }
 
         protected override void LoadContent()

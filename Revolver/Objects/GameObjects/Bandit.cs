@@ -1,17 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Revolver.Controls;
 using Revolver.Controls.Movement;
 using Revolver.Interface;
 using Revolver.Interfaces;
 using Revolver.Managers;
-using SharpDX.Direct2D1;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Revolver.Objects.GameObjects
 {
@@ -35,9 +28,12 @@ namespace Revolver.Objects.GameObjects
 
         public Bandit(Texture2D texture, Vector2 position)
         {
-            Tags = new List<Tag>();
-            Tags.Add(Tag.Deadly);
-            Tags.Add(Tag.Mortal);
+            GameStateManager.gameObjects.Add(this);
+            Tags = new List<Tag>
+            {
+                Tag.Deadly,
+                Tag.Mortal
+            };
             foreach (IMovable gObject in GameStateManager.gameObjects)
             {
                 if(gObject is Player)
@@ -45,19 +41,18 @@ namespace Revolver.Objects.GameObjects
                     Movement = new ChasingMovement(this, gObject);
                 }
             }
-            if(Movement == null)
-            {
-                Movement = new ChasingMovement(this, this);
-            }
+            Movement ??= new ChasingMovement(this, this);
             Texture = texture;
             MinPosition = position;
             Facing = new Vector2(1, 0);
             Width = 30;
             Height = 30;
             Weight = 10;
-            Hitboxes = new List<Hitbox>();
-            Hitboxes.Add(new Hitbox(30, 30, new Vector2(0, 0), texture));
-            Hitboxes.Add(new Hitbox(20, 10, new Vector2(20, 10), texture));
+            Hitboxes = new List<Hitbox>
+            {
+                new Hitbox(30, 30, new Vector2(0, 0), texture),
+                new Hitbox(20, 10, new Vector2(20, 10), texture)
+            };
             ShootCooldown = 1;
         }
 
@@ -66,17 +61,6 @@ namespace Revolver.Objects.GameObjects
             MovementManager.Move(this, gameTime);
             foreach (var hitbox in Hitboxes) { hitbox.Flip(this); }
             //update bullet list
-            foreach (IMovable test in GameStateManager.gameObjects.ToList())
-            {
-                if(test is Bullet)
-                {
-                    Bullet bullet = test as Bullet;
-                    if (bullet.Origin == this && CollisionManager.IsColliding(bullet, GameStateManager.gameObjects))
-                    {
-                        GameStateManager.gameObjects.Remove(bullet);
-                    }
-                }
-            }
             
             ShootCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (ShootCooldown <= 0)

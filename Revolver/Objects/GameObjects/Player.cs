@@ -7,6 +7,7 @@ using Revolver.Interface;
 using Revolver.Interfaces;
 using Revolver.Managers;
 using Revolver.Objects;
+using System;
 using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
@@ -30,9 +31,12 @@ namespace Revolver.Objects.GameObjects
 
         public Player(Texture2D texture)
         {
-            Tags = new List<Tag>();
-            Tags.Add(Tag.Mortal);
-            Tags.Add(Tag.Loadable);
+            GameStateManager.gameObjects.Add(this);
+            Tags = new List<Tag>
+            {
+                Tag.Mortal,
+                Tag.Loadable
+            };
             Movement = new PlayerMovement();
             MinPosition = new Vector2(1, 1);
             Texture = texture;
@@ -40,21 +44,23 @@ namespace Revolver.Objects.GameObjects
             Width = 30;
             Height = 30;
             Weight = 10;
-            Hitboxes = new List<Hitbox>();
-            Hitboxes.Add(new Hitbox(20, 10, new Vector2(10, 20), texture));
-            Hitboxes.Add(new Hitbox(20, 10, new Vector2(20, 10), texture));
-            Hitboxes.Add(new Hitbox(10, 10, new Vector2(10, -10), texture));
+            Hitboxes = new List<Hitbox>
+            {
+                new Hitbox(20, 10, new Vector2(10, 20), texture),
+                new Hitbox(20, 10, new Vector2(20, 10), texture),
+                new Hitbox(10, 10, new Vector2(10, -10), texture)
+            };
         }
 
         public void Update(GameTime gameTime)
-        {
+        {  
             MovementManager.Move(this, gameTime);
             foreach (var hitbox in Hitboxes) { hitbox.Flip(this); }
 
             if (this.Tags.Contains(Tag.Deadly) && CollisionManager.IsCollidingWithBoundaries(this))
             {
                 this.Movement = new PlayerMovement();
-                this.Tags.Add(Tag.Loadable);
+                this.Tags.Add(Tag.Mortal);
                 this.Tags.Remove(Tag.Deadly);
             }
         }
@@ -65,13 +71,15 @@ namespace Revolver.Objects.GameObjects
             {
                 if (gameObject.Tags.Contains(Tag.Mortal))
                 {
+                    GameStateManager.gameObjects.Remove(gameObject);
                 }
                 this.Movement = new PlayerMovement();
-                this.Tags.Add(Tag.Loadable);
+                this.Tags.Add(Tag.Mortal);
                 this.Tags.Remove(Tag.Deadly);
+                return false;
             }
 
-
+            
             if (gameObject.Tags.Contains(Tag.Deadly))
             {
                 MinPosition = new Vector2(1, 1);

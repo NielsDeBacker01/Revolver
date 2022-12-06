@@ -11,7 +11,7 @@ namespace Revolver.Controls.Run
     internal class NoRun : IRun
     {
         public float TimeRunning { get; set; }
-        public int Speed { get; set; }
+        public float Speed { get; set; }
         public float SpeedCap { get; set; }
         public float Acceleration { get; set; }
 

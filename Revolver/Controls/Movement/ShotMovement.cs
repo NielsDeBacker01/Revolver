@@ -20,11 +20,11 @@ namespace Revolver.Controls.Movement
         public IJump JumpManager { get; set; }
         public IRun RunManager { get; set; }
         public int GravityStrength { get; set; }
-        public ShotMovement(Vector2 direction)
+        public ShotMovement(Vector2 direction, float speed = 7f)
         {
             InputReader = new ConstantReader(direction);
             JumpManager = new NoJump();
-            RunManager = new quadDirectionalRun(10, 10f, 0f);
+            RunManager = new quadDirectionalRun(speed, speed, 0f);
             MovementManager = new MovementManager();
             GravityStrength = 0;
         }

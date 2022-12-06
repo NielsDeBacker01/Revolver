@@ -17,13 +17,17 @@ namespace Revolver.Controls.Reader
         {
             Vector2 direction = Vector2.Zero;
 
-            if (self.MinPosition.X < tracker.MinPosition.X)
+            //stabilize when directly underneath
+            if(Math.Abs(self.MinPosition.X - tracker.MinPosition.X) > 1)
             {
-                direction.X += 1;
-            }
-            else if (self.MinPosition.X > tracker.MinPosition.X)
-            {
-                direction.X += -1;
+                if (self.MinPosition.X < tracker.MinPosition.X)
+                {
+                    direction.X += 1;
+                }
+                else if (self.MinPosition.X > tracker.MinPosition.X)
+                {
+                    direction.X += -1;
+                }
             }
             return direction;
         }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Revolver.Controls;
 using Revolver.Controls.Movement;
 using Revolver.Interface;
 using Revolver.Interfaces;
+using Revolver.Managers;
 using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
@@ -27,8 +27,11 @@ namespace Revolver.Objects.GameObjects
 
         public Cactus(Texture2D texture, Vector2 position)
         {
-            Tags = new List<Tag>();
-            Tags.Add(Tag.Deadly);
+            GameStateManager.gameObjects.Add(this);
+            Tags = new List<Tag>
+            {
+                Tag.Deadly
+            };
             Movement = new NoMovement();
             Texture = texture;
             Facing = new Vector2(0, 0);
@@ -36,8 +39,10 @@ namespace Revolver.Objects.GameObjects
             Height = 30;
             MinPosition = position;
             Weight = 0;
-            Hitboxes = new List<Hitbox>();
-            Hitboxes.Add(new Hitbox(30, 30, new Vector2(0, 0), texture));
+            Hitboxes = new List<Hitbox>
+            {
+                new Hitbox(30, 30, new Vector2(0, 0), texture)
+            };
         }
 
         public bool Interaction(IMovable gameObject)

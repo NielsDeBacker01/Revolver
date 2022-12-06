@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Interface;
-using SharpDX.WIC;
 
 namespace Revolver.Objects
 {
@@ -22,10 +20,10 @@ namespace Revolver.Objects
 
         public void Flip(IMovable parent)
         {
-            if(Facing.X != parent.Facing.X)
+            if (Facing.X != parent.Facing.X)
             {
-                this.Offset += new Vector2(parent.Width - this.Box.Width - 2*(this.Offset.X), 0);
-                this.Facing *= new Vector2(-1,0);
+                this.Offset += new Vector2(parent.Width - this.Box.Width - 2 * (this.Offset.X), 0);
+                this.Facing *= new Vector2(-1, 0);
             }
         }
     }

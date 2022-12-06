@@ -5,6 +5,7 @@ using Revolver.Objects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Revolver.Managers
 {
@@ -15,7 +16,7 @@ namespace Revolver.Managers
             //checks collision with screen borders
             movement += ApplyCollision(gameObject, movement);
             //checks collision with other game objects
-            foreach (var gObject in gameObjects)
+            foreach (var gObject in gameObjects.ToList())
             {
                 if (gameObject != gObject)
                 {

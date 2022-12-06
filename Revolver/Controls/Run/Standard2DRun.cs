@@ -5,7 +5,7 @@ namespace Revolver.Controls.Run
     internal class Standard2DRun : IRun
     {
         public float TimeRunning { get; set; }
-        public int Speed { get; set; }
+        public float Speed { get; set; }
         public float SpeedCap { get; set; }
         public float Acceleration { get; set; }
 

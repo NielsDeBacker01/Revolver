@@ -3,12 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Revolver.Controls.Movement;
 using Revolver.Interface;
 using Revolver.Interfaces;
-using SharpDX.Direct3D9;
-using System;
+using Revolver.Managers;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Revolver.Objects.GameObjects
 {
@@ -32,25 +28,46 @@ namespace Revolver.Objects.GameObjects
 
         public Bullet(Texture2D texture, Vector2 position, Vector2 facing, IMovable origin)
         {
-            Tags = new List<Tag>();
-            Tags.Add(Tag.Deadly);
+            GameStateManager.gameObjects.Add(this);
+            Tags = new List<Tag>
+            {
+                Tag.Deadly
+            };
             Texture = texture;
             MinPosition = position;
             Width = 10;
             Height = 5;
             Weight = 0;
             Movement = new ShotMovement(facing);
-            Hitboxes = new List<Hitbox>();
-            Hitboxes.Add(new Hitbox(Width, Height, new Vector2(0, 0), texture));
+            Hitboxes = new List<Hitbox>
+            {
+                new Hitbox(Width, Height, new Vector2(0, 0), texture)
+            };
             Origin = origin;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            MovementManager.Move(this, gameTime);
+            foreach (var hitbox in Hitboxes) { hitbox.Flip(this); }
+
+            if (CollisionManager.IsCollidingWithBoundaries(this))
+            {
+                GameStateManager.gameObjects.Remove(this);
+            }
         }
 
         public bool Interaction(IMovable gameObject)
         {
             if (gameObject == Origin || gameObject is Player)
             {
+                if (gameObject is Player)
+                {
+                    GameStateManager.gameObjects.Remove(this);
+                }
                 return false;
             }
+            GameStateManager.gameObjects.Remove(this);
             return true;
         }
     }
