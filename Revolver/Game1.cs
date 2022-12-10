@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Revolver.Interface;
 using Revolver.Managers;
+using Revolver.Objects;
 using Revolver.Objects.GameObjects;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace Revolver
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            GameStateManager.gameObjects = new List<IMovable>();
+            GameStateManager.gameObjects = new List<Movable>();
             new Player(_playerTexture);
             new Cactus(_cactusTexture, new Vector2(150, 450));
             new Cactus(_cactusTexture, new Vector2(450, 0));
@@ -64,7 +65,7 @@ namespace Revolver
                 Exit();
 
             // TODO: Add your update logic here
-            foreach (IMovable gObject in GameStateManager.gameObjects.ToList())
+            foreach (Movable gObject in GameStateManager.gameObjects.ToList())
             {
                 //handeld by IGameObject
                 gObject.Update(gameTime);
@@ -83,7 +84,7 @@ namespace Revolver
         {
             GraphicsDevice.Clear(Color.Honeydew);
             _spriteBatch.Begin();
-            foreach (IMovable gObject in GameStateManager.gameObjects)
+            foreach (Movable gObject in GameStateManager.gameObjects)
             {
                 //handeld by IGameObject
                 gObject.Draw(_spriteBatch);

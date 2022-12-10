@@ -18,7 +18,7 @@ namespace Revolver.Objects
             this.Facing = new Vector2(1, 0);
         }
 
-        public void Flip(IMovable parent)
+        public void Flip(Movable parent)
         {
             if (Facing.X != parent.Facing.X)
             {

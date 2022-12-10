@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Revolver.Interface;
+using Revolver.Objects;
 using Revolver.Objects.GameObjects;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace Revolver.Controls.Reader
 {
     internal class AiReader : IInputReader
     {
-        private IMovable self;
-        private IMovable tracker;
+        private Movable self;
+        private Movable tracker;
         public Vector2 ReadInput()
         {
             Vector2 direction = Vector2.Zero;
@@ -32,7 +33,7 @@ namespace Revolver.Controls.Reader
             return direction;
         }
 
-        public AiReader(IMovable self, IMovable tracker = null)
+        public AiReader(Movable self, Movable tracker = null)
         {
             this.self = self;
             this.tracker = tracker;

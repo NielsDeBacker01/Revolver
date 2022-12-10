@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Interface;
-using Revolver.Objects;
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
@@ -9,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Revolver.Interfaces
+namespace Revolver.Objects
 {
-    internal interface IObject
+    internal abstract class BaseObject
     {
-        Texture2D Texture { get; set; }
+        public Texture2D Texture { get; set; }
         public Vector2 MinPosition { get; set; }
         public Vector2 MaxPosition
         {
@@ -24,8 +23,8 @@ namespace Revolver.Interfaces
         public List<Hitbox> Hitboxes { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public List<Tag> Tags { get; set; }
-        void Draw(SpriteBatch spriteBatch)
+        public HashSet<Tag> Tags { get; set; }
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, MinPosition, new Rectangle(0, 0, Width, Height), Color.Red);
             foreach (var hitbox in Hitboxes) { spriteBatch.Draw(hitbox.Texture, MinPosition + hitbox.Offset, hitbox.Box, Color.Blue); }

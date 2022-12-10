@@ -8,27 +8,13 @@ using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
 {
-    internal class Cactus : IMovable
+    internal class Cactus : Movable
     {
-        public Texture2D Texture { get; set; }
-        public IMovement Movement { get; set; }
-        public List<Hitbox> Hitboxes { get; set; }
-        public Vector2 MinPosition { get; set; }
-        public Vector2 MaxPosition
-        {
-            get { return MinPosition + new Vector2(Width, Height); }
-            set { MinPosition = value - new Vector2(Width, Height); }
-        }
-        public Vector2 Facing { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public int Weight { get; set; }
-        public List<Tag> Tags { get; set; }
 
         public Cactus(Texture2D texture, Vector2 position)
         {
             GameStateManager.gameObjects.Add(this);
-            Tags = new List<Tag>
+            Tags = new HashSet<Tag>
             {
                 Tag.Deadly
             };
@@ -43,11 +29,6 @@ namespace Revolver.Objects.GameObjects
             {
                 new Hitbox(30, 30, new Vector2(0, 0), texture)
             };
-        }
-
-        public bool Interaction(IMovable gameObject)
-        {
-            return true;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Revolver.Controls.Movement
         public IJump JumpManager { get; set; }
         public IRun RunManager { get; set; }
         public int GravityStrength { get; set; }
-        public ChasingMovement(IMovable self, IMovable tracker)
+        public ChasingMovement(Movable self, Movable tracker)
         {
             InputReader = new AiReader(self, tracker);
             JumpManager = new NoJump();

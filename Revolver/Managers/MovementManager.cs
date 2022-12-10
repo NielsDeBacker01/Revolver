@@ -3,13 +3,14 @@ using Microsoft.Xna.Framework.Input;
 using Revolver.Controls.Movement;
 using Revolver.Controls.Run;
 using Revolver.Interface;
+using Revolver.Objects;
 using System.Collections.Generic;
 
 namespace Revolver.Managers
 {
     internal class MovementManager
     {
-        public static void Move(IMovable gameObject, GameTime gameTime)
+        public static void Move(Movable gameObject, GameTime gameTime)
         {
             Vector2 afstand = Vector2.Zero ;
             if (gameObject.Movement is not NoMovement)

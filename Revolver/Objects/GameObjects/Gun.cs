@@ -9,29 +9,15 @@ using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
 {
-    internal class Gun : IMovable
+    internal class Gun : Movable
     {
-        public Texture2D Texture { get; set; }
-        public IMovement Movement { get; set; }
-        public List<Hitbox> Hitboxes { get; set; }
-        public Vector2 MinPosition { get; set; }
-        public Vector2 MaxPosition
-        {
-            get { return MinPosition + new Vector2(Width, Height); }
-            set { MinPosition = value - new Vector2(Width, Height); }
-        }
-        public Vector2 Facing { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public int Weight { get; set; }
-        public IMovable GunContent { get; set; }
+        public Movable GunContent { get; set; }
         public float ShootCooldown { get; set; }
-        public List<Tag> Tags { get; set; }
 
         public Gun(Texture2D texture, Vector2 position)
         {
             GameStateManager.gameObjects.Add(this);
-            Tags = new List<Tag>();
+            Tags = new HashSet<Tag>();
             Movement = new NoMovement();
             Texture = texture;
             Facing = new Vector2(0, 0);
@@ -45,11 +31,11 @@ namespace Revolver.Objects.GameObjects
                 //new Hitbox(10, 30, new Vector2(10, 0), texture)
             };
         }
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+
             ShootCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-            MovementManager.Move(this, gameTime);
-            foreach (var hitbox in Hitboxes) { hitbox.Flip(this); }
             if (GunContent != null)
             {
                 Vector2 direction = GunContent.Movement.InputReader.ReadInput();
@@ -76,7 +62,7 @@ namespace Revolver.Objects.GameObjects
             }
         }
 
-        public bool Interaction(IMovable gameObject)
+        public override bool Interaction(Movable gameObject)
         {
             if (this.GunContent == null && gameObject.Tags.Contains(Tag.Loadable))
             {

@@ -11,7 +11,7 @@ namespace Revolver.Managers
 {
     internal class CollisionManager
     {
-        public static Vector2 MovementCollisionChecks(IMovable gameObject, Vector2 movement, List<IMovable> gameObjects)
+        public static Vector2 MovementCollisionChecks(Movable gameObject, Vector2 movement, List<Movable> gameObjects)
         {
             //checks collision with screen borders
             movement += ApplyCollision(gameObject, movement);
@@ -31,7 +31,7 @@ namespace Revolver.Managers
             return movement;
         }
 
-        public static Vector2 ApplyCollision(IMovable g1, Vector2 movement, IMovable g2 = null)
+        public static Vector2 ApplyCollision(Movable g1, Vector2 movement, Movable g2 = null)
         {
             Vector2 greatestCorrection = Vector2.Zero;
             foreach (Hitbox hitbox1 in g1.Hitboxes)
@@ -120,7 +120,7 @@ namespace Revolver.Managers
             return greatestCorrection;
         }
 
-        public static bool IsCollidingWithBoundaries(IMovable gameObject)
+        public static bool IsCollidingWithBoundaries(Movable gameObject)
         {
             foreach (Hitbox hitbox in gameObject.Hitboxes)
             {
@@ -134,7 +134,7 @@ namespace Revolver.Managers
             return false;
         }
 
-        public static bool IsCollidingWithObject(IMovable g1, IMovable g2)
+        public static bool IsCollidingWithObject(Movable g1, Movable g2)
         {
             foreach (Hitbox hitbox1 in g1.Hitboxes)
             {
@@ -157,10 +157,10 @@ namespace Revolver.Managers
             return false;
         }
 
-        public static bool IsColliding(IMovable GameObject, List<IMovable> gameObjects, Vector2 addition = new Vector2())
+        public static bool IsColliding(Movable GameObject, List<Movable> gameObjects, Vector2 addition = new Vector2())
         {
             //apply potential movement
-            IMovable updatedGameObject = GameObject;
+            Movable updatedGameObject = GameObject;
             updatedGameObject.MinPosition += addition;
 
             //checks collision with screen borders
@@ -186,7 +186,7 @@ namespace Revolver.Managers
             return false;
         }
 
-        public static bool IsTouchingGround(IMovable gameObject)
+        public static bool IsTouchingGround(Movable gameObject)
         {
             if (gameObject.MaxPosition.Y == 485)
             {

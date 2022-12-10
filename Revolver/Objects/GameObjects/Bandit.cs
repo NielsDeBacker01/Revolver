@@ -8,33 +8,19 @@ using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
 {
-    internal class Bandit : IMovable
+    internal class Bandit : Movable
     {
-        public Texture2D Texture { get; set; }
-        public IMovement Movement { get; set; }
-        public List<Hitbox> Hitboxes { get; set; }
-        public Vector2 MinPosition { get; set; }
-        public Vector2 MaxPosition
-        {
-            get { return MinPosition + new Vector2(Width, Height); }
-            set { MinPosition = value - new Vector2(Width, Height); }
-        }
-        public Vector2 Facing { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public int Weight { get; set; }
         public float ShootCooldown { get; set; }
-        public List<Tag> Tags { get; set; }
 
         public Bandit(Texture2D texture, Vector2 position)
         {
             GameStateManager.gameObjects.Add(this);
-            Tags = new List<Tag>
+            Tags = new HashSet<Tag>
             {
                 Tag.Deadly,
                 Tag.Mortal
             };
-            foreach (IMovable gObject in GameStateManager.gameObjects)
+            foreach (Movable gObject in GameStateManager.gameObjects)
             {
                 if(gObject is Player)
                 {
@@ -56,12 +42,11 @@ namespace Revolver.Objects.GameObjects
             ShootCooldown = 1;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            MovementManager.Move(this, gameTime);
-            foreach (var hitbox in Hitboxes) { hitbox.Flip(this); }
+            base.Update(gameTime);
+
             //update bullet list
-            
             ShootCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (ShootCooldown <= 0)
             {
@@ -70,7 +55,7 @@ namespace Revolver.Objects.GameObjects
             }
         }
 
-        public bool Interaction(IMovable gameObject)
+        public override bool Interaction(Movable gameObject)
         {
 
             if (gameObject is Bullet)

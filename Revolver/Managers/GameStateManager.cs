@@ -1,14 +1,11 @@
-﻿using Revolver.Interface;
-using System;
+﻿using Revolver.Objects;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Revolver.Managers
 {
     internal static class GameStateManager
     {
-        public static List<IMovable> gameObjects;
+        public static List<Movable> gameObjects;
+        public static BaseScene currentScene;
     }
 }
