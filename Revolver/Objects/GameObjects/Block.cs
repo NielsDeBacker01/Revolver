@@ -8,14 +8,11 @@ using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
 {
-    internal class Cactus : BaseObject
+    internal class Block : BaseObject
     {
-        public Cactus(Texture2D texture, Vector2 position)
+        public Block(Texture2D texture, Vector2 position)
         {
-            Tags = new HashSet<Tag>
-            {
-                Tag.Deadly
-            };
+            Tags = new HashSet<Tag>();
             Texture = texture;
             Facing = new Vector2(0, 0);
             Width = 30;

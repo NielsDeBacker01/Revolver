@@ -42,7 +42,7 @@ namespace Revolver.Objects.GameObjects
             }
         }
 
-        public override bool Interaction(Movable gameObject)
+        public override bool Interaction(BaseObject gameObject)
         {
             if (gameObject == Origin || gameObject is Player)
             {

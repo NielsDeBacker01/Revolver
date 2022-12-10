@@ -13,7 +13,7 @@ namespace Revolver.Objects
             MovementManager.Move(this, gameTime);
             foreach (var hitbox in Hitboxes) { hitbox.Flip(this); }
         }
-        public virtual bool Interaction(Movable gameObject)
+        public virtual bool Interaction(BaseObject gameObject)
         {
             return true;
         }

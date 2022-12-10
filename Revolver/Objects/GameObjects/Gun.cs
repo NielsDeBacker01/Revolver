@@ -5,6 +5,7 @@ using Revolver.Controls.Reader;
 using Revolver.Interface;
 using Revolver.Interfaces;
 using Revolver.Managers;
+using SharpDX.XAPO.Fx;
 using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
@@ -62,11 +63,11 @@ namespace Revolver.Objects.GameObjects
             }
         }
 
-        public override bool Interaction(Movable gameObject)
+        public override bool Interaction(BaseObject gameObject)
         {
-            if (this.GunContent == null && gameObject.Tags.Contains(Tag.Loadable))
+            if (this.GunContent == null && gameObject.Tags.Contains(Tag.Loadable) && gameObject is Movable movableObject)
             {
-                this.GunContent = gameObject;
+                this.GunContent = movableObject;
                 this.GunContent.Movement = new NoMovement
                 {
                     InputReader = new KeyboardReader()

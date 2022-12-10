@@ -15,7 +15,7 @@ namespace Revolver.Objects.GameObjects
     internal class Player : Movable
     {
 
-        public Player(Texture2D texture)
+        public Player(Texture2D texture, Vector2 position)
         {
             GameStateManager.gameObjects.Add(this);
             Tags = new HashSet<Tag>
@@ -24,7 +24,7 @@ namespace Revolver.Objects.GameObjects
                 Tag.Loadable
             };
             Movement = new PlayerMovement();
-            MinPosition = new Vector2(1, 1);
+            MinPosition = position;
             Texture = texture;
             Facing = new Vector2(1, 0);
             Width = 30;
@@ -50,7 +50,7 @@ namespace Revolver.Objects.GameObjects
             }
         }
 
-        public override bool Interaction(Movable gameObject)
+        public override bool Interaction(BaseObject gameObject)
         {
             if (this.Tags.Contains(Tag.Deadly) && gameObject is not Gun)
             {

@@ -34,8 +34,8 @@ namespace Revolver
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            GameStateManager.gameObjects = new List<Movable>();
-            new Player(_playerTexture);
+            GameStateManager.gameObjects = new List<BaseObject>();
+            new Player(_playerTexture, new Vector2(1, 1));
             new Cactus(_cactusTexture, new Vector2(150, 450));
             new Cactus(_cactusTexture, new Vector2(450, 0));
             new Cactus(_cactusTexture, new Vector2(180, 450));
@@ -44,6 +44,9 @@ namespace Revolver
             new Gun(_gunTexture, new Vector2(120, 400));
             new Gun(_gunTexture, new Vector2(120, 50));
             new Gun(_gunTexture, new Vector2(450, 50));
+            new Block(_blokTexture, new Vector2(70, 450));
+
+            GameStateManager.currentScene = new BaseScene();
         }
 
         protected override void LoadContent()

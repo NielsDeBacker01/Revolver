@@ -11,7 +11,7 @@ namespace Revolver.Managers
 {
     internal class CollisionManager
     {
-        public static Vector2 MovementCollisionChecks(Movable gameObject, Vector2 movement, List<Movable> gameObjects)
+        public static Vector2 MovementCollisionChecks(Movable gameObject, Vector2 movement, List<BaseObject> gameObjects)
         {
             //checks collision with screen borders
             movement += ApplyCollision(gameObject, movement);
@@ -31,7 +31,7 @@ namespace Revolver.Managers
             return movement;
         }
 
-        public static Vector2 ApplyCollision(Movable g1, Vector2 movement, Movable g2 = null)
+        public static Vector2 ApplyCollision(Movable g1, Vector2 movement, BaseObject g2 = null)
         {
             Vector2 greatestCorrection = Vector2.Zero;
             foreach (Hitbox hitbox1 in g1.Hitboxes)
