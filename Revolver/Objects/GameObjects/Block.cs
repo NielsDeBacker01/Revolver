@@ -12,7 +12,6 @@ namespace Revolver.Objects.GameObjects
     {
         public Block(Texture2D texture, Vector2 position)
         {
-            Tags = new HashSet<Tag>();
             Texture = texture;
             Facing = new Vector2(0, 0);
             Width = 30;

@@ -14,7 +14,6 @@ namespace Revolver.Objects.GameObjects
 
         public Bullet(Texture2D texture, Vector2 position, Vector2 facing, Movable origin)
         {
-            GameStateManager.gameObjects.Add(this);
             Tags = new HashSet<Tag>
             {
                 Tag.Deadly

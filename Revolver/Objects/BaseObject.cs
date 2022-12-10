@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Interface;
+using Revolver.Managers;
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,11 @@ namespace Revolver.Objects
         public int Width { get; set; }
         public int Height { get; set; }
         public HashSet<Tag> Tags { get; set; }
+        public BaseObject()
+        {
+            GameStateManager.gameObjects.Add(this);
+            Tags = new HashSet<Tag>();
+        }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, MinPosition, new Rectangle(0, 0, Width, Height), Color.Red);

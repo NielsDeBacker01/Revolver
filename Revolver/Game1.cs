@@ -68,10 +68,13 @@ namespace Revolver
                 Exit();
 
             // TODO: Add your update logic here
-            foreach (Movable gObject in GameStateManager.gameObjects.ToList())
+            foreach (BaseObject gObject in GameStateManager.gameObjects.ToList())
             {
-                //handeld by IGameObject
-                gObject.Update(gameTime);
+                if (gObject is Movable movableObject)
+                {
+                    //handeld by IGameObject
+                    movableObject.Update(gameTime);
+                }
             }
             base.Update(gameTime);
 
@@ -87,9 +90,9 @@ namespace Revolver
         {
             GraphicsDevice.Clear(Color.Honeydew);
             _spriteBatch.Begin();
-            foreach (Movable gObject in GameStateManager.gameObjects)
+            foreach (BaseObject gObject in GameStateManager.gameObjects)
             {
-                //handeld by IGameObject
+                //handeld by BaseObject/Movable
                 gObject.Draw(_spriteBatch);
             }
             _spriteBatch.End();

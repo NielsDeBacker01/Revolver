@@ -14,17 +14,16 @@ namespace Revolver.Objects.GameObjects
 
         public Bandit(Texture2D texture, Vector2 position)
         {
-            GameStateManager.gameObjects.Add(this);
             Tags = new HashSet<Tag>
             {
                 Tag.Deadly,
                 Tag.Mortal
             };
-            foreach (Movable gObject in GameStateManager.gameObjects)
+            foreach (BaseObject gObject in GameStateManager.gameObjects)
             {
-                if(gObject is Player)
+                if(gObject is Player player)
                 {
-                    Movement = new ChasingMovement(this, gObject);
+                    Movement = new ChasingMovement(this, player);
                 }
             }
             Movement ??= new ChasingMovement(this, this);

@@ -84,7 +84,7 @@ namespace Revolver.Managers
                                     //left approach
                                     if (x1 - movement.X + hitbox1.Box.Width <= x2)
                                     {
-                                        correction.X = hitbox1.Box.Width + x2 - x1;
+                                        correction.X = x2 - (x1 + hitbox1.Box.Width);
                                     }
                                     //right approach
                                     else if (x2 + hitbox2.Box.Width <= x1 - movement.X)
@@ -95,7 +95,7 @@ namespace Revolver.Managers
                                     //top approach
                                     if (y1 - movement.Y <= y2)
                                     {
-                                        correction.Y = hitbox1.Box.Height + y2 - y1;
+                                        correction.Y = y2 - (y1 + hitbox1.Box.Height);
                                     }
                                     //bottom approach
                                     else if (y2 + hitbox2.Box.Height <= y1 - movement.Y)

@@ -17,8 +17,6 @@ namespace Revolver.Objects.GameObjects
 
         public Gun(Texture2D texture, Vector2 position)
         {
-            GameStateManager.gameObjects.Add(this);
-            Tags = new HashSet<Tag>();
             Movement = new NoMovement();
             Texture = texture;
             Facing = new Vector2(0, 0);

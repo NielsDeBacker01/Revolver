@@ -17,7 +17,6 @@ namespace Revolver.Objects.GameObjects
 
         public Player(Texture2D texture, Vector2 position)
         {
-            GameStateManager.gameObjects.Add(this);
             Tags = new HashSet<Tag>
             {
                 Tag.Mortal,
