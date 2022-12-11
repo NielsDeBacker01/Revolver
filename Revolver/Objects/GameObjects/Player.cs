@@ -15,7 +15,7 @@ namespace Revolver.Objects.GameObjects
     internal class Player : Movable
     {
 
-        public Player(Texture2D texture, Vector2 position)
+        public Player(Vector2 position)
         {
             Tags = new HashSet<Tag>
             {
@@ -24,16 +24,17 @@ namespace Revolver.Objects.GameObjects
             };
             Movement = new PlayerMovement();
             MinPosition = position;
-            Texture = texture;
+            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
+            Texture.SetData(new[] { Color.White });
             Facing = new Vector2(1, 0);
             Width = 30;
             Height = 30;
             Weight = 10;
             Hitboxes = new List<Hitbox>
             {
-                new Hitbox(20, 10, new Vector2(10, 20), texture),
-                new Hitbox(20, 10, new Vector2(20, 10), texture),
-                new Hitbox(10, 10, new Vector2(10, -10), texture)
+                new Hitbox(20, 10, new Vector2(10, 20)),
+                new Hitbox(20, 10, new Vector2(20, 10)),
+                new Hitbox(10, 10, new Vector2(10, -10))
             };
         }
 

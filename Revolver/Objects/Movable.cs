@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Revolver.Interfaces;
 using Revolver.Managers;
+using Revolver.Objects.GameObjects;
 
 namespace Revolver.Objects
 {
@@ -13,9 +14,26 @@ namespace Revolver.Objects
             MovementManager.Move(this, gameTime);
             foreach (var hitbox in Hitboxes) { hitbox.Flip(this); }
         }
-        public virtual bool Interaction(BaseObject gameObject)
+
+        public bool InteractWith(BaseObject gameObject)
         {
-            return true;
+            bool interact = Interaction(gameObject);
+            if (interact)
+            {
+                if (this.Tags.Contains(Tag.Mortal) && gameObject.Tags.Contains(Tag.Deadly))
+                {
+                    if( !(this is Bandit && gameObject is Cactus) )
+                    {
+                        GameStateManager.gameObjects.Remove(this);
+                        return false;
+                    }
+
+                }
+            }
+            return interact;
         }
+
+        public abstract bool Interaction(BaseObject gameObject);
+
     }
 }

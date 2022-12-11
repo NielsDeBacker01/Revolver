@@ -15,10 +15,11 @@ namespace Revolver.Objects.GameObjects
         public Movable GunContent { get; set; }
         public float ShootCooldown { get; set; }
 
-        public Gun(Texture2D texture, Vector2 position)
+        public Gun(Vector2 position)
         {
             Movement = new NoMovement();
-            Texture = texture;
+            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
+            Texture.SetData(new[] { Color.White });
             Facing = new Vector2(0, 0);
             Width = 30;
             Height = 30;
@@ -26,8 +27,8 @@ namespace Revolver.Objects.GameObjects
             Weight = 0;
             Hitboxes = new List<Hitbox>
             {
-                new Hitbox(30, 10, new Vector2(0, 10), texture),
-                //new Hitbox(10, 30, new Vector2(10, 0), texture)
+                //new Hitbox(30, 10, new Vector2(0, 10)),
+                new Hitbox(10, 30, new Vector2(10, 0))
             };
         }
         public override void Update(GameTime gameTime)

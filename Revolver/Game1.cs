@@ -5,6 +5,7 @@ using Revolver.Interface;
 using Revolver.Managers;
 using Revolver.Objects;
 using Revolver.Objects.GameObjects;
+using Revolver.Objects.Scenes;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,18 +36,18 @@ namespace Revolver
 
             base.Initialize();
             GameStateManager.gameObjects = new List<BaseObject>();
-            new Player(_playerTexture, new Vector2(1, 1));
-            new Cactus(_cactusTexture, new Vector2(150, 450));
-            new Cactus(_cactusTexture, new Vector2(450, 0));
-            new Cactus(_cactusTexture, new Vector2(180, 450));
-            new Cactus(_cactusTexture, new Vector2(600, 375));
-            new Bandit(_banditTexture, new Vector2(400, 200));
-            new Gun(_gunTexture, new Vector2(120, 400));
-            new Gun(_gunTexture, new Vector2(120, 50));
-            new Gun(_gunTexture, new Vector2(450, 50));
-            new Block(_blokTexture, new Vector2(70, 450));
-
-            GameStateManager.currentScene = new BaseScene();
+            GameStateManager.graphics = GraphicsDevice;
+            new Player(new Vector2(1, 1));
+            new Cactus(new Vector2(150, 450));
+            new Cactus(new Vector2(450, 0));
+            new Cactus(new Vector2(180, 450));
+            new Cactus(new Vector2(600, 375));
+            new Bandit(new Vector2(400, 200));
+            new Gun(new Vector2(120, 400));
+            new Gun(new Vector2(120, 50));
+            new Gun(new Vector2(450, 50));
+            new Block(new Vector2(70, 450));
+            GameStateManager.currentScene = new Level1();
         }
 
         protected override void LoadContent()

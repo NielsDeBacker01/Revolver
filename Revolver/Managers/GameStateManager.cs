@@ -1,4 +1,6 @@
-﻿using Revolver.Objects;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Revolver.Objects;
 using System.Collections.Generic;
 
 namespace Revolver.Managers
@@ -7,5 +9,6 @@ namespace Revolver.Managers
     {
         public static List<BaseObject> gameObjects;
         public static BaseScene currentScene;
+        public static GraphicsDevice graphics;
     }
 }

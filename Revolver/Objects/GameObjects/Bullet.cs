@@ -12,13 +12,15 @@ namespace Revolver.Objects.GameObjects
     {
         public Movable Origin;
 
-        public Bullet(Texture2D texture, Vector2 position, Vector2 facing, Movable origin)
+        public Bullet(Vector2 position, Vector2 facing, Movable origin)
         {
             Tags = new HashSet<Tag>
             {
                 Tag.Deadly
             };
-            Texture = texture;
+
+            Texture =  new Texture2D(GameStateManager.graphics, 1, 1);
+            Texture.SetData(new[] { Color.White });
             MinPosition = position;
             Width = 10;
             Height = 5;
@@ -26,7 +28,7 @@ namespace Revolver.Objects.GameObjects
             Movement = new ShotMovement(facing);
             Hitboxes = new List<Hitbox>
             {
-                new Hitbox(Width, Height, new Vector2(0, 0), texture)
+                new Hitbox(Width, Height, new Vector2(0, 0))
             };
             Origin = origin;
         }
@@ -35,7 +37,7 @@ namespace Revolver.Objects.GameObjects
         {
             base.Update(gameTime);
 
-            if (CollisionManager.IsCollidingWithBoundaries(this))
+            if (CollisionManager.IsCollidingWithBoundaries(this) || !GameStateManager.gameObjects.Contains(Origin))
             {
                 GameStateManager.gameObjects.Remove(this);
             }

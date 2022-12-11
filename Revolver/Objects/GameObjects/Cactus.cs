@@ -10,20 +10,21 @@ namespace Revolver.Objects.GameObjects
 {
     internal class Cactus : BaseObject
     {
-        public Cactus(Texture2D texture, Vector2 position)
+        public Cactus(Vector2 position)
         {
             Tags = new HashSet<Tag>
             {
                 Tag.Deadly
             };
-            Texture = texture;
+            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
+            Texture.SetData(new[] { Color.White });
             Facing = new Vector2(0, 0);
             Width = 30;
             Height = 30;
             MinPosition = position;
             Hitboxes = new List<Hitbox>
             {
-                new Hitbox(30, 30, new Vector2(0, 0), texture)
+                new Hitbox(30, 30, new Vector2(0, 0))
             };
         }
     }

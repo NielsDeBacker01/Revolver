@@ -75,11 +75,11 @@ namespace Revolver.Managers
                     {
                         float x2 = g2.MinPosition.X + hitbox2.Offset.X;
                         float y2 = g2.MinPosition.Y + hitbox2.Offset.Y;
-                        if ((x2 <= x1 && x1 < x2 + hitbox2.Box.Width) || (x2 < x1 + hitbox1.Box.Width && x1 + hitbox1.Box.Width <= x2 + hitbox2.Box.Width))
+                        if ((x2 <= x1 && x1 < x2 + hitbox2.Box.Width) || (x1 <= x2 && x2 < x1 + hitbox1.Box.Width))
                         {
-                            if ((y2 <= y1 && y1 < y2 + hitbox2.Box.Height) || (y2 < y1 + hitbox1.Box.Height && y1 + hitbox1.Box.Height <= y2 + hitbox2.Box.Height))
+                            if ((y2 <= y1 && y1 < y2 + hitbox2.Box.Height) || (y1 <= y2 && y2 < y1 + hitbox1.Box.Height))
                             {
-                                if (g1.Interaction(g2))
+                                if (g1.InteractWith(g2))
                                 {
                                     correction = Vector2.Zero;
                                     //left approach
@@ -146,9 +146,9 @@ namespace Revolver.Managers
                 {
                     float x2 = g2.MinPosition.X + hitbox2.Offset.X;
                     float y2 = g2.MinPosition.Y + hitbox2.Offset.Y;
-                    if ((x2 <= x1 && x1 < x2 + hitbox2.Box.Width) || (x2 < x1 + hitbox1.Box.Width && x1 + hitbox1.Box.Width <= x2 + hitbox2.Box.Width))
+                    if ((x2 <= x1 && x1 < x2 + hitbox2.Box.Width) || (x1 <= x2 && x2 < x1 + hitbox1.Box.Width))
                     {
-                        if ((y2 <= y1 && y1 <= y2 + hitbox2.Box.Height) || (y2 <= y1 + hitbox1.Box.Height && y1 + hitbox1.Box.Height <= y2 + hitbox2.Box.Height))
+                        if ((y2 <= y1 && y1 <= y2 + hitbox2.Box.Height) || (y1 <= y2 && y2 <= y1 + hitbox1.Box.Height))
                         {
                             return true;
                         }
@@ -177,7 +177,7 @@ namespace Revolver.Managers
                 {
                     if (IsCollidingWithObject(updatedGameObject,gObject))
                     {
-                        if (updatedGameObject.Interaction(gObject))
+                        if (updatedGameObject.InteractWith(gObject))
                         {
                             return true;
                         }

@@ -13,7 +13,7 @@ namespace Revolver.Objects.GameObjects
     {
         public float ShootCooldown { get; set; }
 
-        public Bandit(Texture2D texture, Vector2 position)
+        public Bandit(Vector2 position)
         {
             Tags = new HashSet<Tag>
             {
@@ -25,7 +25,8 @@ namespace Revolver.Objects.GameObjects
                 Movement = new ChasingMovement(this, player);
             }
             Movement ??= new ChasingMovement(this, this);
-            Texture = texture;
+            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
+            Texture.SetData(new[] { Color.White });
             MinPosition = position;
             Facing = new Vector2(1, 0);
             Width = 30;
@@ -33,8 +34,8 @@ namespace Revolver.Objects.GameObjects
             Weight = 10;
             Hitboxes = new List<Hitbox>
             {
-                new Hitbox(30, 30, new Vector2(0, 0), texture),
-                new Hitbox(20, 10, new Vector2(20, 10), texture)
+                new Hitbox(30, 30, new Vector2(0, 0)),
+                new Hitbox(20, 10, new Vector2(20, 10))
             };
             ShootCooldown = 1;
         }
@@ -47,7 +48,7 @@ namespace Revolver.Objects.GameObjects
             ShootCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (ShootCooldown <= 0)
             {
-                GameStateManager.gameObjects.Add(new Bullet(Texture, this.MinPosition + new Vector2(0, Height/2), this.Facing, this));
+                GameStateManager.gameObjects.Add(new Bullet(this.MinPosition + new Vector2(0, Height/2), this.Facing, this));
                 ShootCooldown = 1;
             }
         }

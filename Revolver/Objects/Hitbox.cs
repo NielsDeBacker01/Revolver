@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Interface;
+using Revolver.Managers;
 
 namespace Revolver.Objects
 {
@@ -10,11 +11,12 @@ namespace Revolver.Objects
         public Vector2 Offset { get; set; }
         public Texture2D Texture { get; set; }
         public Vector2 Facing { get; set; }
-        public Hitbox(int width, int height, Vector2 offset, Texture2D texture)
+        public Hitbox(int width, int height, Vector2 offset)
         {
             this.Box = new Rectangle(0, 0, width, height);
             this.Offset = offset;
-            this.Texture = texture;
+            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
+            Texture.SetData(new[] { Color.White });
             this.Facing = new Vector2(1, 0);
         }
 
