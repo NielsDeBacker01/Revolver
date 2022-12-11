@@ -5,6 +5,7 @@ using Revolver.Interface;
 using Revolver.Interfaces;
 using Revolver.Managers;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Revolver.Objects.GameObjects
 {
@@ -19,12 +20,9 @@ namespace Revolver.Objects.GameObjects
                 Tag.Deadly,
                 Tag.Mortal
             };
-            foreach (BaseObject gObject in GameStateManager.gameObjects)
+            foreach (Player player in GameStateManager.gameObjects.OfType<Player>().ToList())
             {
-                if(gObject is Player player)
-                {
-                    Movement = new ChasingMovement(this, player);
-                }
+                Movement = new ChasingMovement(this, player);
             }
             Movement ??= new ChasingMovement(this, this);
             Texture = texture;

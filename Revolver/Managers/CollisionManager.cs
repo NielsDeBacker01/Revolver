@@ -2,6 +2,7 @@
 using Revolver.Controls.Movement;
 using Revolver.Interface;
 using Revolver.Objects;
+using Revolver.Objects.GameObjects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -74,9 +75,9 @@ namespace Revolver.Managers
                     {
                         float x2 = g2.MinPosition.X + hitbox2.Offset.X;
                         float y2 = g2.MinPosition.Y + hitbox2.Offset.Y;
-                        if ((x2 <= x1 && x1 <= x2 + hitbox2.Box.Width) || (x2 <= x1 + hitbox1.Box.Width && x1 + hitbox1.Box.Width <= x2 + hitbox2.Box.Width))
+                        if ((x2 <= x1 && x1 < x2 + hitbox2.Box.Width) || (x2 < x1 + hitbox1.Box.Width && x1 + hitbox1.Box.Width <= x2 + hitbox2.Box.Width))
                         {
-                            if ((y2 <= y1 && y1 <= y2 + hitbox2.Box.Height) || (y2 < y1 + hitbox1.Box.Height && y1 + hitbox1.Box.Height < y2 + hitbox2.Box.Height))
+                            if ((y2 <= y1 && y1 < y2 + hitbox2.Box.Height) || (y2 < y1 + hitbox1.Box.Height && y1 + hitbox1.Box.Height <= y2 + hitbox2.Box.Height))
                             {
                                 if (g1.Interaction(g2))
                                 {
@@ -120,7 +121,7 @@ namespace Revolver.Managers
             return greatestCorrection;
         }
 
-        public static bool IsCollidingWithBoundaries(Movable gameObject)
+        public static bool IsCollidingWithBoundaries(BaseObject gameObject)
         {
             foreach (Hitbox hitbox in gameObject.Hitboxes)
             {
@@ -134,7 +135,7 @@ namespace Revolver.Managers
             return false;
         }
 
-        public static bool IsCollidingWithObject(Movable g1, Movable g2)
+        public static bool IsCollidingWithObject(BaseObject g1, BaseObject g2)
         {
             foreach (Hitbox hitbox1 in g1.Hitboxes)
             {
@@ -145,7 +146,7 @@ namespace Revolver.Managers
                 {
                     float x2 = g2.MinPosition.X + hitbox2.Offset.X;
                     float y2 = g2.MinPosition.Y + hitbox2.Offset.Y;
-                    if ((x2 <= x1 && x1 <= x2 + hitbox2.Box.Width) || (x2 <= x1 + hitbox1.Box.Width && x1 + hitbox1.Box.Width <= x2 + hitbox2.Box.Width))
+                    if ((x2 <= x1 && x1 < x2 + hitbox2.Box.Width) || (x2 < x1 + hitbox1.Box.Width && x1 + hitbox1.Box.Width <= x2 + hitbox2.Box.Width))
                     {
                         if ((y2 <= y1 && y1 <= y2 + hitbox2.Box.Height) || (y2 <= y1 + hitbox1.Box.Height && y1 + hitbox1.Box.Height <= y2 + hitbox2.Box.Height))
                         {
@@ -157,7 +158,7 @@ namespace Revolver.Managers
             return false;
         }
 
-        public static bool IsColliding(Movable GameObject, List<Movable> gameObjects, Vector2 addition = new Vector2())
+        public static bool IsColliding(Movable GameObject, List<BaseObject> gameObjects, Vector2 addition = new Vector2())
         {
             //apply potential movement
             Movable updatedGameObject = GameObject;
@@ -186,11 +187,18 @@ namespace Revolver.Managers
             return false;
         }
 
-        public static bool IsTouchingGround(Movable gameObject)
+        public static bool IsTouchingGround(BaseObject gameObject)
         {
             if (gameObject.MaxPosition.Y == 485)
             {
                 return true;
+            }
+            foreach(Block block in GameStateManager.gameObjects.OfType<Block>().ToList())
+            {
+                if(IsCollidingWithObject(gameObject, block))
+                {
+                    return true;
+                }
             }
             return false;
         }
