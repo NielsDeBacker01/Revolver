@@ -61,22 +61,5 @@ namespace Revolver.Objects.GameObjects
                 }
             }
         }
-
-        public override bool Interaction(BaseObject gameObject)
-        {
-            if (this.GunContent == null && gameObject.Tags.Contains(Tag.Loadable) && gameObject is Movable movableObject)
-            {
-                this.GunContent = movableObject;
-                this.GunContent.Movement = new NoMovement
-                {
-                    InputReader = new KeyboardReader()
-                };
-                this.GunContent.MinPosition = this.MinPosition;
-                this.ShootCooldown = 0.10f;
-                this.GunContent.Tags.Remove(Tag.Loadable);
-                this.GunContent.Tags.Remove(Tag.Mortal);
-            }
-            return false;
-        }
     }
 }

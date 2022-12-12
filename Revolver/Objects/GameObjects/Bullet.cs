@@ -42,19 +42,5 @@ namespace Revolver.Objects.GameObjects
                 GameStateManager.gameObjects.Remove(this);
             }
         }
-
-        public override bool Interaction(BaseObject gameObject)
-        {
-            if (gameObject == Origin || gameObject is Player)
-            {
-                if (gameObject is Player)
-                {
-                    GameStateManager.gameObjects.Remove(this);
-                }
-                return false;
-            }
-            GameStateManager.gameObjects.Remove(this);
-            return true;
-        }
     }
 }

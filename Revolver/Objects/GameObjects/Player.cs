@@ -49,35 +49,5 @@ namespace Revolver.Objects.GameObjects
                 this.Tags.Remove(Tag.Deadly);
             }
         }
-
-        public override bool Interaction(BaseObject gameObject)
-        {
-            if (this.Tags.Contains(Tag.Deadly) && gameObject is not Gun)
-            {
-                if (gameObject.Tags.Contains(Tag.Mortal))
-                {
-                    GameStateManager.gameObjects.Remove(gameObject);
-                }
-                this.Movement = new PlayerMovement();
-                this.Tags.Add(Tag.Mortal);
-                this.Tags.Remove(Tag.Deadly);
-                return false;
-            }
-
-            
-            if (gameObject.Tags.Contains(Tag.Deadly))
-            {
-                MinPosition = new Vector2(1, 1);
-                Movement.ResetMovement();
-                return false;
-            }
-
-            if (gameObject is Gun)
-            {
-                return false;
-            }
-
-            return true;
-        }
     }
 }

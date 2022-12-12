@@ -52,19 +52,5 @@ namespace Revolver.Objects.GameObjects
                 ShootCooldown = 1;
             }
         }
-
-        public override bool Interaction(BaseObject gameObject)
-        {
-
-            if (gameObject is Bullet)
-            {
-                Bullet originTest = gameObject as Bullet;
-                if(originTest.Origin == this)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
     }
 }

@@ -3,7 +3,9 @@ using Microsoft.Xna.Framework.Input;
 using Revolver.Controls.Movement;
 using Revolver.Controls.Run;
 using Revolver.Interface;
+using Revolver.Managers;
 using Revolver.Objects;
+using System;
 using System.Collections.Generic;
 
 namespace Revolver.Managers
@@ -101,3 +103,4 @@ namespace Revolver.Managers
         }
     }
 }
+

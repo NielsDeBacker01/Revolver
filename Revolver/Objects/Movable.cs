@@ -14,26 +14,5 @@ namespace Revolver.Objects
             MovementManager.Move(this, gameTime);
             foreach (var hitbox in Hitboxes) { hitbox.Flip(this); }
         }
-
-        public bool InteractWith(BaseObject gameObject)
-        {
-            bool interact = Interaction(gameObject);
-            if (interact)
-            {
-                if (this.Tags.Contains(Tag.Mortal) && gameObject.Tags.Contains(Tag.Deadly))
-                {
-                    if( !(this is Bandit && gameObject is Cactus) )
-                    {
-                        GameStateManager.gameObjects.Remove(this);
-                        return false;
-                    }
-
-                }
-            }
-            return interact;
-        }
-
-        public abstract bool Interaction(BaseObject gameObject);
-
     }
 }

@@ -29,12 +29,6 @@ namespace Revolver.Objects
                 objAbbreviation[tile](new Vector2(1,1));
             }
             */
-
-            foreach (BaseObject gObject in GameStateManager.gameObjects)
-            {
-                //handeld by BaseObject/Movable
-                gObject.Draw(spriteBatch);
-            }
         }
     }
 }

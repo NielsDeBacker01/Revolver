@@ -79,7 +79,7 @@ namespace Revolver.Managers
                         {
                             if ((y2 <= y1 && y1 < y2 + hitbox2.Box.Height) || (y1 <= y2 && y2 < y1 + hitbox1.Box.Height))
                             {
-                                if (g1.InteractWith(g2))
+                                if (InteractionManager.Interaction(g1, g2))
                                 {
                                     correction = Vector2.Zero;
                                     //left approach
@@ -177,7 +177,7 @@ namespace Revolver.Managers
                 {
                     if (IsCollidingWithObject(updatedGameObject,gObject))
                     {
-                        if (updatedGameObject.InteractWith(gObject))
+                        if (InteractionManager.Interaction(GameObject, gObject))
                         {
                             return true;
                         }

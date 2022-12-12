@@ -12,6 +12,17 @@ namespace Revolver.Objects.Scenes
     {
         public override char[,] Map { get; set; }
 
+        public Level1()
+        {
+            Map = new char[,]
+            {
+                { '0', '0', '1', '0'},
+                { '0', '0', '0', '0'},
+                { '0', '0', '0', '0'},
+                { '0', '0', '0', '0'}
+            };
+        }   
+
         public override void LoadScene()
         {
             new Player(new Vector2(1, 1));
