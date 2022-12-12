@@ -16,54 +16,6 @@ namespace Revolver.Managers
     {
         public static bool Interaction(BaseObject g1, BaseObject g2) 
         {
-            HashSet<Tag> oldTags1 = new(g1.Tags);
-            HashSet<Tag> oldTags2 = new(g2.Tags);
-
-            bool[] values1 = InteractionCheck(g1, g2);
-            HashSet<Tag> newTags1 = new(g1.Tags);
-            HashSet<Tag> newTags2 = new(g2.Tags);
-            g1.Tags = new(oldTags1);
-            g2.Tags = new(oldTags2);
-
-            bool[] values2 = InteractionCheck(g2, g1);
-            g1.Tags = new(newTags1);
-            g2.Tags = new(newTags2);
-
-            bool g1Kill = values1[0];
-            bool g2Kill = values2[0];
-            bool doCollision = values1[1] && values2[1];
-
-            //kill scenarios
-            if (g1Kill)
-            {
-                if (g1 is Player player1)
-                {
-                    player1.MinPosition = new Vector2(1, 1);
-                    player1.Movement.ResetMovement();
-                }
-                else
-                {
-                    GameStateManager.gameObjects.Remove(g1);
-                }
-            }
-            if (g2Kill)
-            {
-                if (g2 is Player player2)
-                {
-                    player2.MinPosition = new Vector2(1, 1);
-                    player2.Movement.ResetMovement();
-                }
-                else
-                {
-                    GameStateManager.gameObjects.Remove(g2);
-                }
-            }
-
-            return doCollision;
-        }
-
-        private static bool[] InteractionCheck(BaseObject g1, BaseObject g2)
-        {
             bool g1Kill = false;
             bool doCollision = true;
 
@@ -111,15 +63,29 @@ namespace Revolver.Managers
                     gun.ShootCooldown = 0.10f;
                     gun.GunContent.Tags.Remove(Tag.Loadable);
                     gun.GunContent.Tags.Remove(Tag.Mortal);
-                } 
+                }
                 doCollision = false;
             }
-            else if(g1 is Bullet)
+            else if (g1 is Bullet)
             {
                 doCollision = false;
             }
 
-            return new bool[] { g1Kill, doCollision };
+            //kill scenarios
+            if (g1Kill)
+            {
+                if (g1 is Player player1)
+                {
+                    player1.MinPosition = new Vector2(1, 1);
+                    player1.Movement.ResetMovement();
+                }
+                else
+                {
+                    GameStateManager.gameObjects.Remove(g1);
+                }
+            }
+
+            return doCollision;
         }
     }
 }
