@@ -27,7 +27,7 @@ namespace Revolver.Objects.GameObjects
             Weight = 0;
             Hitboxes = new List<Hitbox>
             {
-                //new Hitbox(30, 10, new Vector2(0, 10)),
+                new Hitbox(30, 10, new Vector2(0, 10)),
                 new Hitbox(10, 30, new Vector2(10, 0))
             };
         }
