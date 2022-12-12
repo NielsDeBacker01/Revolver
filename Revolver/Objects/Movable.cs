@@ -27,7 +27,19 @@ namespace Revolver.Objects
                         GameStateManager.gameObjects.Remove(this);
                         return false;
                     }
+                }
 
+                if (this.Tags.Contains(Tag.Deadly) && gameObject.Tags.Contains(Tag.Mortal))
+                {
+                    if(gameObject is Player player)
+                    {
+                        player.Respawn();
+                    }
+                    else
+                    {
+                        GameStateManager.gameObjects.Remove(gameObject);
+                    }            
+                    return false;
                 }
             }
             return interact;

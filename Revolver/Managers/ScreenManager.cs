@@ -25,7 +25,7 @@ namespace Revolver.Managers
             {
                 if (gObject is Movable movableObject)
                 {
-                    //handeld by IGameObject
+                    //handeld by Movable
                     movableObject.Update(gameTime);
                 }
             }

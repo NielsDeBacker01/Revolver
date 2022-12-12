@@ -14,7 +14,7 @@ namespace Revolver.Objects.GameObjects
 {
     internal class Player : Movable
     {
-
+        private bool delayedInteraction = false;
         public Player(Vector2 position)
         {
             Tags = new HashSet<Tag>
@@ -39,7 +39,15 @@ namespace Revolver.Objects.GameObjects
         }
 
         public override void Update(GameTime gameTime)
-        {  
+        {
+            if (delayedInteraction)
+            {
+                this.Movement = new PlayerMovement();
+                this.Tags.Add(Tag.Mortal);
+                this.Tags.Remove(Tag.Deadly);
+                delayedInteraction = false;
+            }
+
             base.Update(gameTime);
 
             if (this.Tags.Contains(Tag.Deadly) && CollisionManager.IsCollidingWithBoundaries(this))
@@ -54,21 +62,22 @@ namespace Revolver.Objects.GameObjects
         {
             if (this.Tags.Contains(Tag.Deadly) && gameObject is not Gun)
             {
+                if (gameObject is Cactus)
+                {
+                    Respawn();
+                }
                 if (gameObject.Tags.Contains(Tag.Mortal))
                 {
                     GameStateManager.gameObjects.Remove(gameObject);
+                    delayedInteraction = true;
                 }
-                this.Movement = new PlayerMovement();
-                this.Tags.Add(Tag.Mortal);
-                this.Tags.Remove(Tag.Deadly);
                 return false;
             }
 
             
             if (gameObject.Tags.Contains(Tag.Deadly))
             {
-                MinPosition = new Vector2(1, 1);
-                Movement.ResetMovement();
+                Respawn();
                 return false;
             }
 
@@ -78,6 +87,17 @@ namespace Revolver.Objects.GameObjects
             }
 
             return true;
+        }
+
+        public void Respawn()
+        {
+            MinPosition = new Vector2(1, 1);
+            Movement = new PlayerMovement();
+            Tags = new HashSet<Tag>
+            {
+                Tag.Mortal,
+                Tag.Loadable
+            };
         }
     }
 }

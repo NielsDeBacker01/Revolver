@@ -82,26 +82,32 @@ namespace Revolver.Managers
                                 if (g1.InteractWith(g2))
                                 {
                                     correction = Vector2.Zero;
-                                    //left approach
-                                    if (x1 - movement.X + hitbox1.Box.Width <= x2)
+                                    if(movement.X != 0)
                                     {
-                                        correction.X = x2 - (x1 + hitbox1.Box.Width);
+                                        //left approach
+                                        if (x1 - movement.X + hitbox1.Box.Width <= x2)
+                                        {
+                                            correction.X = x2 - (x1 + hitbox1.Box.Width);
+                                        }
+                                        //right approach
+                                        else if (x2 + hitbox2.Box.Width <= x1 - movement.X)
+                                        {
+                                            correction.X = x2 + hitbox2.Box.Width - x1;
+                                        }
                                     }
-                                    //right approach
-                                    else if (x2 + hitbox2.Box.Width <= x1 - movement.X)
+                      
+                                    if(movement.Y != 0)
                                     {
-                                        correction.X = x2 + hitbox2.Box.Width - x1;
-                                    }
-
-                                    //top approach
-                                    if (y1 - movement.Y <= y2)
-                                    {
-                                        correction.Y = y2 - (y1 + hitbox1.Box.Height);
-                                    }
-                                    //bottom approach
-                                    else if (y2 + hitbox2.Box.Height <= y1 - movement.Y)
-                                    {
-                                        correction.Y = y2 + hitbox2.Box.Height - y1;
+                                        //top approach
+                                        if (y1 - movement.Y <= y2)
+                                        {
+                                            correction.Y = y2 - (y1 + hitbox1.Box.Height);
+                                        }
+                                        //bottom approach
+                                        else if (y2 + hitbox2.Box.Height <= y1 - movement.Y)
+                                        {
+                                            correction.Y = y2 + hitbox2.Box.Height - y1;
+                                        }
                                     }
 
                                     if (Math.Abs(correction.X) > Math.Abs(greatestCorrection.X))
