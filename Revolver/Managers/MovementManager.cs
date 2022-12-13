@@ -96,6 +96,8 @@ namespace Revolver.Managers
             //collissionChecks
             afstand = CollisionManager.MovementCollisionChecks(gameObject, afstand, GameStateManager.gameObjects);
 
+
+
             //apply result
             gameObject.MinPosition += afstand;
         }

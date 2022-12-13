@@ -33,7 +33,7 @@ namespace Revolver.Objects.GameObjects
             Hitboxes = new List<Hitbox>
             {
                 new Hitbox(20, 10, new Vector2(0, 20)),
-                new Hitbox(20, 10, new Vector2(20, 10)),
+                new Hitbox(30, 10, new Vector2(10, 10)),
                 new Hitbox(10, 10, new Vector2(10, -10))
             };
         }
@@ -74,7 +74,6 @@ namespace Revolver.Objects.GameObjects
                 delayedInteraction = true;
                 return true;
             }
-
             
             if (gameObject.Tags.Contains(Tag.Deadly))
             {

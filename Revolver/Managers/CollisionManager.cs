@@ -96,7 +96,7 @@ namespace Revolver.Managers
                                         }
                                     }
                       
-                                    if(movement.Y != 0)
+                                    if(movement.Y != 0 && IsCollidingWithObject(g1, g2))
                                     {
                                         //top approach
                                         if (y1 - movement.Y <= y2)
