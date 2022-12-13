@@ -24,6 +24,11 @@ namespace Revolver.Objects.Scenes
             new Gun(new Vector2(120, 50));
             new Gun(new Vector2(450, 50));
             new Block(new Vector2(70, 450));
+            new Block(new Vector2(270, 60));
+            new Block(new Vector2(270, 0));
+            new Block(new Vector2(240, 150));
+            new Block(new Vector2(270, 150));
+            new Block(new Vector2(300, 150));
         }
     }
 }

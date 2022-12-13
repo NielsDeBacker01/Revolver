@@ -10,7 +10,6 @@ namespace Revolver.Managers
     {
         internal static void Draw(SpriteBatch spriteBatch)
         {
-            GameStateManager.currentScene.DrawScene(spriteBatch);
             foreach (BaseObject gObject in GameStateManager.gameObjects)
             {
                 //handeld by BaseObject/Movable
@@ -35,6 +34,7 @@ namespace Revolver.Managers
         {
             GameStateManager.gameObjects.Clear();
             GameStateManager.currentScene.LoadScene();
+            GameStateManager.currentScene.LoadMap();
         }
     }
 }

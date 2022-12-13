@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Revolver.Managers;
 using Revolver.Objects.GameObjects;
 using SharpDX.Direct2D1;
+using SharpDX.Direct2D1.Effects;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
@@ -21,19 +23,17 @@ namespace Revolver.Objects
         public abstract void LoadScene();
         public abstract char[,] Map { get; set; }
 
-        public void DrawScene(SpriteBatch spriteBatch)
+        public void LoadMap()
         {
-            /*
-            foreach(char tile in Map)
+            if(Map != null)
             {
-                objAbbreviation[tile](new Vector2(1,1));
-            }
-            */
-
-            foreach (BaseObject gObject in GameStateManager.gameObjects)
-            {
-                //handeld by BaseObject/Movable
-                gObject.Draw(spriteBatch);
+                for (int y = 0; y < Map.GetLength(1); y++)
+                {
+                    for (int x = 0; x < Map.GetLength(0); x++)
+                    {
+                        objAbbreviation[Map[x, y]](new Vector2(30 * x, 30 * y));
+                    }
+                }
             }
         }
     }

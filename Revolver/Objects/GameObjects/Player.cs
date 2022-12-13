@@ -32,7 +32,7 @@ namespace Revolver.Objects.GameObjects
             Weight = 10;
             Hitboxes = new List<Hitbox>
             {
-                new Hitbox(20, 10, new Vector2(10, 20)),
+                new Hitbox(20, 10, new Vector2(0, 20)),
                 new Hitbox(20, 10, new Vector2(20, 10)),
                 new Hitbox(10, 10, new Vector2(10, -10))
             };
@@ -65,13 +65,14 @@ namespace Revolver.Objects.GameObjects
                 if (gameObject is Cactus)
                 {
                     Respawn();
+                    return false;
                 }
                 if (gameObject.Tags.Contains(Tag.Mortal))
                 {
                     GameStateManager.gameObjects.Remove(gameObject);
-                    delayedInteraction = true;
                 }
-                return false;
+                delayedInteraction = true;
+                return true;
             }
 
             

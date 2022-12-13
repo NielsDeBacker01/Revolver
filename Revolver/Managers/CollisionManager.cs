@@ -203,7 +203,14 @@ namespace Revolver.Managers
             {
                 if(IsCollidingWithObject(gameObject, block))
                 {
-                    return true;
+                    foreach(Hitbox hitbox in gameObject.Hitboxes)
+                    {
+                        if ( gameObject.MinPosition.Y + hitbox.Box.Height + hitbox.Offset.Y == block.MinPosition.Y )
+                        {
+
+                            return true;
+                        }
+                    }
                 }
             }
             return false;
