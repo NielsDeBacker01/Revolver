@@ -14,24 +14,27 @@ namespace Revolver.Objects
     delegate void del(Vector2 position);
     internal abstract class BaseScene
     {
-        public  Dictionary<char, del> objAbbreviation = new()
+        public  Dictionary<string, del> objAbbreviation = new()
         {
-            {'0', null },
-            {'1', delegate(Vector2 position){ new Block(position); } }
+            {"0", null },
+            {"1", delegate(Vector2 position){ new Block(position); } }
         };
 
         public abstract void LoadScene();
-        public abstract char[,] Map { get; set; }
+        public abstract string[,] Map { get; set; }
 
         public void LoadMap()
         {
             if(Map != null)
             {
-                for (int y = 0; y < Map.GetLength(1); y++)
+                for (int x = 0; x < Map.GetLength(1); x++)
                 {
-                    for (int x = 0; x < Map.GetLength(0); x++)
+                    for (int y = 0; y < Map.GetLength(0); y++)
                     {
-                        objAbbreviation[Map[x, y]](new Vector2(30 * x, 30 * y));
+                        if(objAbbreviation[Map[y, x]] != null)
+                        {
+                            objAbbreviation[Map[y, x]].DynamicInvoke(new Vector2(30 * x, 30 * y));
+                        }     
                     }
                 }
             }

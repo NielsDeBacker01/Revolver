@@ -72,7 +72,7 @@ namespace Revolver.Objects.GameObjects
                     InputReader = new KeyboardReader()
                 };
                 this.GunContent.MinPosition = this.MinPosition;
-                this.ShootCooldown = 0.10f;
+                this.ShootCooldown = 0.15f;
                 this.GunContent.Tags.Remove(Tag.Loadable);
                 this.GunContent.Tags.Remove(Tag.Mortal);
             }
