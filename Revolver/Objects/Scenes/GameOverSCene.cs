@@ -1,11 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Revolver.Managers;
-using Revolver.Objects.GameObjects;
 using Revolver.Objects.UIElements;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Revolver.Objects.Scenes
 {
-    internal class TitleScreen : BaseScene
+    internal class GameOverScene : BaseScene
     {
         public override string[,] Map { get; set; }
 
@@ -31,7 +35,7 @@ namespace Revolver.Objects.Scenes
                 { "0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"}
             };
             GameStateManager.UIToggle = true;
-            new Title(new Vector2(0, 0));
+            new GameOver(new Vector2(50, 50));
         }
     }
 }

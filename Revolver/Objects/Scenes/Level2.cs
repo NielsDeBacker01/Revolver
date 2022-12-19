@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Revolver.Managers;
 using Revolver.Objects.GameObjects;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ namespace Revolver.Objects.Scenes
                 { "0","0","0","0","0","0","0","0","0","0","0","0","1","0","0","0","0","0","0","0","0","0","0","0","1","0","0"}
             };
             new Player(new Vector2(1, 1));
+            GameStateManager.UIToggle = false;
         }
     }
 }

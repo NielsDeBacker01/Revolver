@@ -29,8 +29,9 @@ namespace Revolver.Objects
         {
             GameStateManager.gameObjects.Add(this);
             Tags = new HashSet<Tag>();
+            Hitboxes = new List<Hitbox>();
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, MinPosition, new Rectangle(0, 0, Width, Height), Color.Red);
             foreach (var hitbox in Hitboxes) { spriteBatch.Draw(hitbox.Texture, MinPosition + hitbox.Offset, hitbox.Box, Color.Blue); }

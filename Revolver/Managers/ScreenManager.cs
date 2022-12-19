@@ -3,11 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Revolver.Objects;
 using System.Linq;
 using System;
+using Revolver.Controls.Reader;
 
 namespace Revolver.Managers
 {
     internal static class ScreenManager
     {
+        private static UIReader menuController = new UIReader();
         internal static void Draw(SpriteBatch spriteBatch)
         {
             foreach (BaseObject gObject in GameStateManager.gameObjects)
@@ -19,13 +21,20 @@ namespace Revolver.Managers
 
         internal static void Update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
-            foreach (BaseObject gObject in GameStateManager.gameObjects.ToList())
+            if (GameStateManager.UIToggle)
             {
-                if (gObject is Movable movableObject)
+                UIManager.Update(gameTime);
+            } 
+            else
+            {
+                // TODO: Add your update logic here
+                foreach (BaseObject gObject in GameStateManager.gameObjects.ToList())
                 {
-                    //handeld by Movable
-                    movableObject.Update(gameTime);
+                    if (gObject is Movable movableObject)
+                    {
+                        //handeld by Movable
+                        movableObject.Update(gameTime);
+                    }
                 }
             }
         }
