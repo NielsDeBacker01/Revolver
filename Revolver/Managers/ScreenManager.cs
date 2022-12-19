@@ -33,8 +33,8 @@ namespace Revolver.Managers
         internal static void Load()
         {
             GameStateManager.gameObjects.Clear();
-            GameStateManager.currentScene.LoadScene();
-            GameStateManager.currentScene.LoadMap();
+            GameStateManager.CurrentScene().LoadScene();
+            GameStateManager.CurrentScene().LoadMap();
         }
     }
 }

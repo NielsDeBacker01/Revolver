@@ -30,7 +30,7 @@ namespace Revolver
             base.Initialize();
             GameStateManager.gameObjects = new List<BaseObject>();
             GameStateManager.graphics = GraphicsDevice;
-            GameStateManager.currentScene = new Level1();
+            GameStateManager.LevelIndex = 0;
             ScreenManager.Load();
         }
 
