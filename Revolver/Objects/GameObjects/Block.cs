@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Revolver.Controls.Movement;
-using Revolver.Interface;
-using Revolver.Interfaces;
 using Revolver.Managers;
 using System.Collections.Generic;
 

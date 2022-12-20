@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Controls.Movement;
-using Revolver.Interface;
-using Revolver.Interfaces;
 using Revolver.Managers;
 using System.Collections.Generic;
 
@@ -19,7 +17,7 @@ namespace Revolver.Objects.GameObjects
                 Tag.Deadly
             };
 
-            Texture =  new Texture2D(GameStateManager.graphics, 1, 1);
+            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
             Texture.SetData(new[] { Color.White });
             MinPosition = position;
             Width = 10;

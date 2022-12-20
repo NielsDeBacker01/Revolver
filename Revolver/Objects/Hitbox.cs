@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Revolver.Interface;
 using Revolver.Managers;
 
 namespace Revolver.Objects

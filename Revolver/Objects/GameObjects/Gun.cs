@@ -2,10 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Controls.Movement;
 using Revolver.Controls.Reader;
-using Revolver.Interface;
-using Revolver.Interfaces;
 using Revolver.Managers;
-using SharpDX.XAPO.Fx;
 using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects

@@ -1,9 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Revolver.Controls.Reader;
 using Revolver.Objects;
 using System.Linq;
-using System;
-using Revolver.Controls.Reader;
 
 namespace Revolver.Managers
 {
@@ -24,7 +23,7 @@ namespace Revolver.Managers
             if (GameStateManager.UIToggle)
             {
                 UIManager.Update(gameTime);
-            } 
+            }
             else
             {
                 // TODO: Add your update logic here

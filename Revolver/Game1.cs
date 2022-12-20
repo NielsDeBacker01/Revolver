@@ -1,13 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Revolver.Interface;
 using Revolver.Managers;
 using Revolver.Objects;
-using Revolver.Objects.GameObjects;
-using Revolver.Objects.Scenes;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Revolver
 {

@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Revolver.Objects;
 using Revolver.Objects.Scenes;
 using System.Collections.Generic;
@@ -28,13 +27,13 @@ namespace Revolver.Managers
             if (index < 0)
             {
                 LevelIndex++;
-            } 
+            }
             else
             {
                 LevelIndex = index;
             }
 
-            if(LevelIndex < 0 || LevelIndex >= LevelList.Count)
+            if (LevelIndex < 0 || LevelIndex >= LevelList.Count)
             {
                 LevelIndex = 0;
             }

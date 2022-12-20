@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using Revolver.Interface;
 
 namespace Revolver.Controls.Reader

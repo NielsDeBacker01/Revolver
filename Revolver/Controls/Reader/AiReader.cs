@@ -14,7 +14,7 @@ namespace Revolver.Controls.Reader
             Vector2 direction = Vector2.Zero;
 
             //stabilize when directly underneath
-            if(Math.Abs(self.MinPosition.X - tracker.MinPosition.X) > 1)
+            if (Math.Abs(self.MinPosition.X - tracker.MinPosition.X) > 1)
             {
                 if (self.MinPosition.X < tracker.MinPosition.X)
                 {

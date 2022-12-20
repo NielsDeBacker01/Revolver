@@ -22,7 +22,7 @@ namespace Revolver.Objects
             {
                 if (this.Tags.Contains(Tag.Mortal) && gameObject.Tags.Contains(Tag.Deadly))
                 {
-                    if( !(this is Bandit && gameObject is Cactus) )
+                    if (!(this is Bandit && gameObject is Cactus))
                     {
                         GameStateManager.gameObjects.Remove(this);
                         return false;
@@ -31,14 +31,14 @@ namespace Revolver.Objects
 
                 if (this.Tags.Contains(Tag.Deadly) && gameObject.Tags.Contains(Tag.Mortal))
                 {
-                    if(gameObject is Player player)
+                    if (gameObject is Player player)
                     {
                         player.Respawn();
                     }
                     else
                     {
                         GameStateManager.gameObjects.Remove(gameObject);
-                    }            
+                    }
                     return false;
                 }
             }

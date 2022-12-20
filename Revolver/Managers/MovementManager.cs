@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using Revolver.Controls.Movement;
 using Revolver.Controls.Run;
-using Revolver.Interface;
 using Revolver.Objects;
-using System.Collections.Generic;
 
 namespace Revolver.Managers
 {
@@ -12,7 +9,7 @@ namespace Revolver.Managers
     {
         public static void Move(Movable gameObject, GameTime gameTime)
         {
-            Vector2 afstand = Vector2.Zero ;
+            Vector2 afstand = Vector2.Zero;
             if (gameObject.Movement is not NoMovement)
             {
                 //get input
@@ -49,7 +46,7 @@ namespace Revolver.Managers
                 Speed.X = gameObject.Movement.RunManager.CalculateRun();
 
                 //jump logic
-                if (gameObject.Movement.RunManager is  not quadDirectionalRun)
+                if (gameObject.Movement.RunManager is not quadDirectionalRun)
                 {
                     //normal jump calculation
                     if (CollisionManager.IsTouchingGround(gameObject))
@@ -84,7 +81,8 @@ namespace Revolver.Managers
                             direction.Y = 1;
                         }
                     }
-                } else
+                }
+                else
                 {
                     //alternate quadDirectionalRun
                     Speed.Y = gameObject.Movement.RunManager.CalculateRun();

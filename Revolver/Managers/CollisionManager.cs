@@ -1,11 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Revolver.Controls.Movement;
-using Revolver.Interface;
 using Revolver.Objects;
 using Revolver.Objects.GameObjects;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace Revolver.Managers
@@ -59,8 +57,8 @@ namespace Revolver.Managers
                     {
                         correction.Y -= (y1 + hitbox1.Box.Height) % 485;
                     }
-                    
-                    if(Math.Abs(correction.X) > Math.Abs(greatestCorrection.X))
+
+                    if (Math.Abs(correction.X) > Math.Abs(greatestCorrection.X))
                     {
                         greatestCorrection.X = correction.X;
                     }
@@ -82,7 +80,7 @@ namespace Revolver.Managers
                                 if (g1.InteractWith(g2))
                                 {
                                     correction = Vector2.Zero;
-                                    if(movement.X != 0)
+                                    if (movement.X != 0)
                                     {
                                         //left approach
                                         if (x1 - movement.X + hitbox1.Box.Width <= x2)
@@ -95,8 +93,8 @@ namespace Revolver.Managers
                                             correction.X = x2 + hitbox2.Box.Width - x1;
                                         }
                                     }
-                      
-                                    if(movement.Y != 0 && IsCollidingWithObject(g1, g2))
+
+                                    if (movement.Y != 0 && IsCollidingWithObject(g1, g2))
                                     {
                                         //top approach
                                         if (y1 - movement.Y <= y2)
@@ -181,7 +179,7 @@ namespace Revolver.Managers
             {
                 if (updatedGameObject != gObject)
                 {
-                    if (IsCollidingWithObject(updatedGameObject,gObject))
+                    if (IsCollidingWithObject(updatedGameObject, gObject))
                     {
                         if (updatedGameObject.InteractWith(gObject))
                         {
@@ -199,13 +197,13 @@ namespace Revolver.Managers
             {
                 return true;
             }
-            foreach(Block block in GameStateManager.gameObjects.OfType<Block>().ToList())
+            foreach (Block block in GameStateManager.gameObjects.OfType<Block>().ToList())
             {
-                if(IsCollidingWithObject(gameObject, block))
+                if (IsCollidingWithObject(gameObject, block))
                 {
-                    foreach(Hitbox hitbox in gameObject.Hitboxes)
+                    foreach (Hitbox hitbox in gameObject.Hitboxes)
                     {
-                        if ( gameObject.MinPosition.Y + hitbox.Box.Height + hitbox.Offset.Y == block.MinPosition.Y )
+                        if (gameObject.MinPosition.Y + hitbox.Box.Height + hitbox.Offset.Y == block.MinPosition.Y)
                         {
 
                             return true;

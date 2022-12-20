@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Revolver.Interface;
-using Revolver.Managers;
-using System.Collections.Generic;
+﻿using Revolver.Interface;
 
 namespace Revolver.Interfaces
 {

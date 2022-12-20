@@ -4,11 +4,6 @@ using Revolver.Controls.Run;
 using Revolver.Interface;
 using Revolver.Interfaces;
 using Revolver.Managers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Revolver.Controls.Movement
 {

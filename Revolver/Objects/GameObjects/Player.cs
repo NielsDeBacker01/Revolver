@@ -1,13 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Revolver.Controls;
 using Revolver.Controls.Movement;
-using Revolver.Interface;
-using Revolver.Interfaces;
 using Revolver.Managers;
-using Revolver.Objects;
-using System;
 using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
@@ -60,6 +54,12 @@ namespace Revolver.Objects.GameObjects
 
         public override bool Interaction(BaseObject gameObject)
         {
+            if (gameObject is Goal)
+            {
+                GameStateManager.NextLevel();
+                return false;
+            }
+
             if (this.Tags.Contains(Tag.Deadly) && gameObject is not Gun)
             {
                 if (gameObject is Cactus)
@@ -74,7 +74,7 @@ namespace Revolver.Objects.GameObjects
                 delayedInteraction = true;
                 return true;
             }
-            
+
             if (gameObject.Tags.Contains(Tag.Deadly))
             {
                 Respawn();

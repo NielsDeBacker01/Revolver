@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Controls.Movement;
-using Revolver.Interface;
-using Revolver.Interfaces;
 using Revolver.Managers;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +46,7 @@ namespace Revolver.Objects.GameObjects
             ShootCooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (ShootCooldown <= 0)
             {
-                GameStateManager.gameObjects.Add(new Bullet(this.MinPosition + new Vector2(0, Height/2), this.Facing, this));
+                GameStateManager.gameObjects.Add(new Bullet(this.MinPosition + new Vector2(0, Height / 2), this.Facing, this));
                 ShootCooldown = 1;
             }
         }
@@ -59,7 +57,7 @@ namespace Revolver.Objects.GameObjects
             if (gameObject is Bullet)
             {
                 Bullet originTest = gameObject as Bullet;
-                if(originTest.Origin == this)
+                if (originTest.Origin == this)
                 {
                     return false;
                 }
