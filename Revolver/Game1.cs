@@ -26,6 +26,7 @@ namespace Revolver
             base.Initialize();
             GameStateManager.gameObjects = new List<BaseObject>();
             GameStateManager.graphics = GraphicsDevice;
+            GameStateManager.content = this.Content;
             GameStateManager.LevelIndex = 0;
             ScreenManager.Load();
         }
@@ -52,7 +53,7 @@ namespace Revolver
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Honeydew);
+            GraphicsDevice.Clear(Color.Yellow);
             _spriteBatch.Begin();
             ScreenManager.Draw(_spriteBatch);
             _spriteBatch.End();

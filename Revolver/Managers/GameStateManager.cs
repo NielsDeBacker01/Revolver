@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Revolver.Objects;
 using Revolver.Objects.Scenes;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Revolver.Managers
         public static bool UIToggle = false;
         public static List<BaseObject> gameObjects;
         public static GraphicsDevice graphics;
+        public static ContentManager content;
         private static List<BaseScene> LevelList = new()
         {
             new TitleScreen(),

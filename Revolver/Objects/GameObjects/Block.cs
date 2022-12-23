@@ -9,12 +9,13 @@ namespace Revolver.Objects.GameObjects
     {
         public Block(Vector2 position)
         {
-            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
-            Texture.SetData(new[] { Color.White });
+            Texture = GameStateManager.content.Load<Texture2D>("Tileset");
             Facing = new Vector2(0, 0);
             Width = 30;
             Height = 30;
             MinPosition = position;
+            spriteX = 96;
+            spriteY = 96;
             Hitboxes = new List<Hitbox>
             {
                 new Hitbox(30, 30, new Vector2(0, 0))

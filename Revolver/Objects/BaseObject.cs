@@ -18,6 +18,8 @@ namespace Revolver.Objects
         public List<Hitbox> Hitboxes { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+        protected int spriteX { get; set; } = 0;
+        protected int spriteY { get; set; } = 0;
         public HashSet<Tag> Tags { get; set; }
         public BaseObject()
         {
@@ -27,8 +29,8 @@ namespace Revolver.Objects
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, MinPosition, new Rectangle(0, 0, Width, Height), Color.Red);
-            foreach (var hitbox in Hitboxes) { spriteBatch.Draw(hitbox.Texture, MinPosition + hitbox.Offset, hitbox.Box, Color.Blue); }
+            spriteBatch.Draw(Texture, MinPosition, new Rectangle(spriteX, spriteY, Width, Height), Color.White);
+            //foreach (var hitbox in Hitboxes) { spriteBatch.Draw(hitbox.Texture, MinPosition + hitbox.Offset, hitbox.Box, Color.Blue); }
         }
     }
 }
