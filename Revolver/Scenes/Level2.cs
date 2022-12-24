@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Revolver.Managers;
 using Revolver.Objects.GameObjects;
 
@@ -6,8 +7,6 @@ namespace Revolver.Objects.Scenes
 {
     internal class Level2 : BaseScene
     {
-        public override string[,] Map { get; set; }
-
         public override void LoadScene()
         {
             Map = new string[,]
@@ -29,6 +28,7 @@ namespace Revolver.Objects.Scenes
                 { "0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"},
                 { "0","0","0","0","0","0","0","0","0","0","0","0","1","0","0","0","0","0","0","0","0","0","0","0","1","0","0"}
             };
+            Background = GameStateManager.content.Load<Texture2D>("Background");
             new Player(new Vector2(1, 1));
             GameStateManager.UIToggle = false;
         }

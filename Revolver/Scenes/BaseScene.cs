@@ -1,5 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Revolver.Managers;
 using Revolver.Objects.GameObjects;
+using SharpDX.Direct3D9;
 using System.Collections.Generic;
 
 namespace Revolver.Objects.Scenes
@@ -15,7 +18,8 @@ namespace Revolver.Objects.Scenes
         };
 
         public abstract void LoadScene();
-        public abstract string[,] Map { get; set; }
+        public string[,] Map { get; set; }
+        public Texture2D Background { get; set; }
 
         public void LoadMap()
         {
@@ -31,6 +35,14 @@ namespace Revolver.Objects.Scenes
                         }
                     }
                 }
+            }
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            if(Background != null)
+            {
+                spriteBatch.Draw(Background, new Rectangle(0, 0, ScreenManager.ScreenWidth, ScreenManager.ScreenHeight), new Rectangle(0, 0, Background.Width, Background.Height), Color.White);
             }
         }
     }

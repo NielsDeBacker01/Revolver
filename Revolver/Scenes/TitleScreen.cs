@@ -6,8 +6,6 @@ namespace Revolver.Objects.Scenes
 {
     internal class TitleScreen : BaseScene
     {
-        public override string[,] Map { get; set; }
-
         public override void LoadScene()
         {
             Map = new string[,]

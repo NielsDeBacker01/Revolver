@@ -15,11 +15,10 @@ namespace Revolver.Objects.GameObjects
         public Gun(Vector2 position)
         {
             Movement = new NoMovement();
-            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
-            Texture.SetData(new[] { Color.White });
+            Texture = GameStateManager.content.Load<Texture2D>("Gun");
             Facing = new Vector2(0, 0);
-            Width = 30;
-            Height = 30;
+            Width = 50;
+            Height = 50;
             MinPosition = position;
             Weight = 0;
             Hitboxes = new List<Hitbox>

@@ -29,7 +29,7 @@ namespace Revolver.Objects
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, MinPosition, new Rectangle(spriteX, spriteY, Width, Height), Color.White);
+            spriteBatch.Draw(Texture, new Rectangle((int)MinPosition.X, (int)MinPosition.Y, Width, Height), new Rectangle(spriteX, spriteY, 32, 32), Color.White);
             //foreach (var hitbox in Hitboxes) { spriteBatch.Draw(hitbox.Texture, MinPosition + hitbox.Offset, hitbox.Box, Color.Blue); }
         }
     }

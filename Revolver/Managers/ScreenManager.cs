@@ -8,9 +8,12 @@ namespace Revolver.Managers
 {
     internal static class ScreenManager
     {
+        public static int ScreenWidth { get; set; }
+        public static int ScreenHeight { get; set; }
         private static UIReader menuController = new UIReader();
         internal static void Draw(SpriteBatch spriteBatch)
         {
+            GameStateManager.CurrentScene().Draw(spriteBatch);
             foreach (BaseObject gObject in GameStateManager.gameObjects)
             {
                 //handeld by BaseObject/Movable

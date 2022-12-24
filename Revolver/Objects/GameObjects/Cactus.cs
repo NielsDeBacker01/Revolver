@@ -13,8 +13,7 @@ namespace Revolver.Objects.GameObjects
             {
                 Tag.Deadly
             };
-            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
-            Texture.SetData(new[] { Color.White });
+            Texture = GameStateManager.content.Load<Texture2D>("Cactus");
             Facing = new Vector2(0, 0);
             Width = 30;
             Height = 30;

@@ -28,6 +28,8 @@ namespace Revolver
             GameStateManager.graphics = GraphicsDevice;
             GameStateManager.content = this.Content;
             GameStateManager.LevelIndex = 0;
+            ScreenManager.ScreenWidth = 800;
+            ScreenManager.ScreenHeight = 485;
             ScreenManager.Load();
         }
 
