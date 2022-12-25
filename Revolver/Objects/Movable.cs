@@ -24,7 +24,7 @@ namespace Revolver.Objects
                 {
                     if (!(this is Bandit && gameObject is Cactus))
                     {
-                        GameStateManager.gameObjects.Remove(this);
+                        GameStateManager.Remove(this);
                         return false;
                     }
                 }
@@ -37,7 +37,7 @@ namespace Revolver.Objects
                     }
                     else
                     {
-                        GameStateManager.gameObjects.Remove(gameObject);
+                        GameStateManager.Remove(gameObject);
                     }
                     return false;
                 }

@@ -14,7 +14,8 @@ namespace Revolver.Objects.Scenes
         {
             {"0", null },
             {"1", delegate(Vector2 position){ new Block(position); } },
-            {"2", delegate(Vector2 position){ new Goal(position); } }
+            {"G", delegate(Vector2 position){ new Goal(position); } },
+            {"C", delegate(Vector2 position){ new Cactus(position); } }
         };
 
         public abstract void LoadScene();

@@ -131,7 +131,7 @@ namespace Revolver.Managers
             {
                 float x1 = gameObject.MinPosition.X + hitbox.Offset.X;
                 float y1 = gameObject.MinPosition.Y + hitbox.Offset.Y;
-                if (x1 + hitbox.Box.Width >= 800 || x1 <= 0 || y1 <= 0 || y1 + hitbox.Box.Height >= 485)
+                if (x1 + hitbox.Box.Width >= ScreenManager.ScreenWidth || x1 <= 0 || y1 <= 0 || y1 + hitbox.Box.Height >= ScreenManager.ScreenHeight)
                 {
                     return true;
                 }

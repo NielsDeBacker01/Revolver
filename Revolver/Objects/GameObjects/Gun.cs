@@ -23,8 +23,7 @@ namespace Revolver.Objects.GameObjects
             Weight = 0;
             Hitboxes = new List<Hitbox>
             {
-                new Hitbox(30, 10, new Vector2(0, 10)),
-                new Hitbox(10, 30, new Vector2(10, 0))
+                new Hitbox(50, 20, new Vector2(0, 10))
             };
         }
         public override void Update(GameTime gameTime)
@@ -67,7 +66,7 @@ namespace Revolver.Objects.GameObjects
                 {
                     InputReader = new KeyboardReader()
                 };
-                this.GunContent.MinPosition = this.MinPosition;
+                this.GunContent.MinPosition = new Vector2(this.MinPosition.X + Width/2 - GunContent.Width/2, this.MinPosition.Y + Height / 2 - GunContent.Height / 2);
                 this.ShootCooldown = 0.15f;
                 this.GunContent.Tags.Remove(Tag.Loadable);
                 this.GunContent.Tags.Remove(Tag.Mortal);

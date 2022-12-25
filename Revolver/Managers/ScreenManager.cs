@@ -11,13 +11,14 @@ namespace Revolver.Managers
         public static int ScreenWidth { get; set; }
         public static int ScreenHeight { get; set; }
         private static UIReader menuController = new UIReader();
+
         internal static void Draw(SpriteBatch spriteBatch)
         {
             GameStateManager.CurrentScene().Draw(spriteBatch);
-            foreach (BaseObject gObject in GameStateManager.gameObjects)
+            foreach (GameElement gElement in GameStateManager.gameElements)
             {
                 //handeld by BaseObject/Movable
-                gObject.Draw(spriteBatch);
+                gElement.Draw(spriteBatch);
             }
         }
 
@@ -44,6 +45,7 @@ namespace Revolver.Managers
         internal static void Load()
         {
             GameStateManager.gameObjects.Clear();
+            GameStateManager.gameElements.Clear();
             GameStateManager.CurrentScene().LoadScene();
             GameStateManager.CurrentScene().LoadMap();
         }

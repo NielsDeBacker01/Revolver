@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Revolver.Managers;
 using Revolver.Objects.UIElements;
 
@@ -27,8 +28,10 @@ namespace Revolver.Objects.Scenes
                 { "0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"},
                 { "0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"}
             };
+            Background = GameStateManager.content.Load<Texture2D>("Background");
             GameStateManager.UIToggle = true;
-            new Title(new Vector2(0, 0));
+            new Text(new Vector2(50, 50), "Revolver");
+            new Text(new Vector2(50, 100), "Press enter to start");
         }
     }
 }

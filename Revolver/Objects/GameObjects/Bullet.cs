@@ -37,7 +37,7 @@ namespace Revolver.Objects.GameObjects
 
             if (CollisionManager.IsCollidingWithBoundaries(this) || !GameStateManager.gameObjects.Contains(Origin))
             {
-                GameStateManager.gameObjects.Remove(this);
+                GameStateManager.Remove(this);
             }
         }
 
@@ -47,11 +47,11 @@ namespace Revolver.Objects.GameObjects
             {
                 if (gameObject is Player)
                 {
-                    GameStateManager.gameObjects.Remove(this);
+                    GameStateManager.Remove(this);
                 }
                 return false;
             }
-            GameStateManager.gameObjects.Remove(this);
+            GameStateManager.Remove(this);
             return true;
         }
     }

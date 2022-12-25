@@ -9,6 +9,7 @@ namespace Revolver.Objects.GameObjects
     internal class Player : Movable
     {
         private bool delayedInteraction = false;
+        private int scale = 2;
         public Player(Vector2 position)
         {
             Tags = new HashSet<Tag>
@@ -18,17 +19,23 @@ namespace Revolver.Objects.GameObjects
             };
             Movement = new PlayerMovement();
             MinPosition = position;
-            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
-            Texture.SetData(new[] { Color.White });
+            Texture = GameStateManager.content.Load<Texture2D>("bulletSheet");
             Facing = new Vector2(1, 0);
-            Width = 30;
-            Height = 30;
+            Width = 12 * scale;
+            Height = 21 * scale;
+            dimensionsX = 12;
+            dimensionsY = 21;
+            spriteX = 6;
+            spriteY = 16;
             Weight = 10;
             Hitboxes = new List<Hitbox>
             {
-                new Hitbox(30, 10, new Vector2(0, 20)),
-                new Hitbox(30, 10, new Vector2(10, 10)),
-                new Hitbox(10, 10, new Vector2(10, -10))
+                new Hitbox(2* scale, 3* scale, new Vector2(1, 2)* scale),
+                new Hitbox(6* scale, 5* scale, new Vector2(3, 0)* scale),
+                new Hitbox(2* scale, 3* scale, new Vector2(9, 2)* scale),
+                new Hitbox(12* scale, 14* scale, new Vector2(0, 5)* scale),
+                new Hitbox(3* scale, 6* scale, new Vector2(1, 15)* scale),
+                new Hitbox(3* scale, 6* scale, new Vector2(9, 15)* scale)
             };
         }
 

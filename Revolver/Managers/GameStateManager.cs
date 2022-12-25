@@ -10,8 +10,10 @@ namespace Revolver.Managers
     {
         public static bool UIToggle = false;
         public static List<BaseObject> gameObjects;
+        public static List<GameElement> gameElements;
         public static GraphicsDevice graphics;
         public static ContentManager content;
+        public static SpriteFont Font;
         private static List<BaseScene> LevelList = new()
         {
             new TitleScreen(),
@@ -41,6 +43,15 @@ namespace Revolver.Managers
             }
 
             ScreenManager.Load();
+        }
+
+        public static void Remove(GameElement removable)
+        {
+            gameElements.Remove(removable);
+            if (removable is BaseObject removable2) 
+            {
+                gameObjects.Remove(removable2);
+            }
         }
     }
 }

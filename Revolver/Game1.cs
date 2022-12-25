@@ -25,11 +25,13 @@ namespace Revolver
             // TODO: Add your initialization logic here
             base.Initialize();
             GameStateManager.gameObjects = new List<BaseObject>();
+            GameStateManager.gameElements = new List<GameElement>();
             GameStateManager.graphics = GraphicsDevice;
             GameStateManager.content = this.Content;
             GameStateManager.LevelIndex = 0;
-            ScreenManager.ScreenWidth = 800;
-            ScreenManager.ScreenHeight = 485;
+            GameStateManager.Font = Content.Load<SpriteFont>("Text");
+            ScreenManager.ScreenWidth = Window.ClientBounds.Width;
+            ScreenManager.ScreenHeight = Window.ClientBounds.Height;
             ScreenManager.Load();
         }
 
