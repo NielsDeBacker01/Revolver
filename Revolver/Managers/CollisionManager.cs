@@ -10,7 +10,7 @@ namespace Revolver.Managers
 {
     internal class CollisionManager
     {
-        public static Vector2 MovementCollisionChecks(Movable gameObject, Vector2 movement, List<BaseObject> gameObjects)
+        public static Vector2 MovementCollisionChecks(DynamicObject gameObject, Vector2 movement, List<BaseObject> gameObjects)
         {
             //checks collision with screen borders
             movement += ApplyCollision(gameObject, movement);
@@ -30,10 +30,10 @@ namespace Revolver.Managers
             return movement;
         }
 
-        public static Vector2 ApplyCollision(Movable g1, Vector2 movement, BaseObject g2 = null)
+        public static Vector2 ApplyCollision(DynamicObject g1, Vector2 movement, BaseObject g2 = null)
         {
             Vector2 greatestCorrection = Vector2.Zero;
-            foreach (Hitbox hitbox1 in g1.Hitboxes)
+            foreach (Hitbox hitbox1 in g1.currentFrame.Hitboxes)
             {
                 Vector2 correction = Vector2.Zero;
                 float x1 = g1.MinPosition.X + hitbox1.Offset.X + movement.X;
@@ -69,7 +69,7 @@ namespace Revolver.Managers
                 }
                 else
                 {
-                    foreach (Hitbox hitbox2 in g2.Hitboxes)
+                    foreach (Hitbox hitbox2 in g2.currentFrame.Hitboxes)
                     {
                         float x2 = g2.MinPosition.X + hitbox2.Offset.X;
                         float y2 = g2.MinPosition.Y + hitbox2.Offset.Y;
@@ -127,7 +127,7 @@ namespace Revolver.Managers
 
         public static bool IsCollidingWithBoundaries(BaseObject gameObject)
         {
-            foreach (Hitbox hitbox in gameObject.Hitboxes)
+            foreach (Hitbox hitbox in gameObject.currentFrame.Hitboxes)
             {
                 float x1 = gameObject.MinPosition.X + hitbox.Offset.X;
                 float y1 = gameObject.MinPosition.Y + hitbox.Offset.Y;
@@ -141,12 +141,12 @@ namespace Revolver.Managers
 
         public static bool IsCollidingWithObject(BaseObject g1, BaseObject g2)
         {
-            foreach (Hitbox hitbox1 in g1.Hitboxes)
+            foreach (Hitbox hitbox1 in g1.currentFrame.Hitboxes)
             {
                 float x1 = g1.MinPosition.X + hitbox1.Offset.X;
                 float y1 = g1.MinPosition.Y + hitbox1.Offset.Y;
 
-                foreach (Hitbox hitbox2 in g2.Hitboxes)
+                foreach (Hitbox hitbox2 in g2.currentFrame.Hitboxes)
                 {
                     float x2 = g2.MinPosition.X + hitbox2.Offset.X;
                     float y2 = g2.MinPosition.Y + hitbox2.Offset.Y;
@@ -162,10 +162,10 @@ namespace Revolver.Managers
             return false;
         }
 
-        public static bool IsColliding(Movable GameObject, List<BaseObject> gameObjects, Vector2 addition = new Vector2())
+        public static bool IsColliding(DynamicObject GameObject, List<BaseObject> gameObjects, Vector2 addition = new Vector2())
         {
             //apply potential movement
-            Movable updatedGameObject = GameObject;
+            DynamicObject updatedGameObject = GameObject;
             updatedGameObject.MinPosition += addition;
 
             //checks collision with screen borders
@@ -194,15 +194,26 @@ namespace Revolver.Managers
         public static bool IsTouchingGround(BaseObject gameObject)
         {
             //bottom collision
-            if (gameObject.MaxPosition.Y == ScreenManager.ScreenHeight) 
+            if (gameObject.MaxPosition.Y >= ScreenManager.ScreenHeight) 
             {
                 return true;
             }
+
+            foreach (Hitbox hitbox in gameObject.currentFrame.Hitboxes)
+            {
+                float x1 = gameObject.MinPosition.X + hitbox.Offset.X;
+                float y1 = gameObject.MinPosition.Y + hitbox.Offset.Y;
+                if (y1 + hitbox.Box.Height >= ScreenManager.ScreenHeight)
+                {
+                    return true;
+                }
+            }
+
             foreach (Block block in GameStateManager.gameObjects.OfType<Block>().ToList())
             {
                 if (IsCollidingWithObject(gameObject, block) && !block.IsWall)
                 {
-                    foreach (Hitbox hitbox in gameObject.Hitboxes)
+                    foreach (Hitbox hitbox in gameObject.currentFrame.Hitboxes)
                     {
                         if (gameObject.MinPosition.Y + hitbox.Box.Height + hitbox.Offset.Y == block.MinPosition.Y)
                         {

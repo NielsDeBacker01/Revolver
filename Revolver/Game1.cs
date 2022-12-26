@@ -7,7 +7,8 @@ using System.Collections.Generic;
 
 namespace Revolver
 {
-    public enum Tag { Mortal, Deadly, Loadable }
+    public enum Tag { Mortal, Deadly, Loadable };
+    public enum status { Idle, Walking };
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -30,6 +31,7 @@ namespace Revolver
             GameStateManager.content = this.Content;
             GameStateManager.LevelIndex = 0;
             GameStateManager.Font = Content.Load<SpriteFont>("Text");
+            AnimationManager.Load();
             ScreenManager.ScreenWidth = Window.ClientBounds.Width;
             ScreenManager.ScreenHeight = Window.ClientBounds.Height;
             ScreenManager.Load();

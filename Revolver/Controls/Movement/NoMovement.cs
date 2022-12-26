@@ -9,7 +9,6 @@ namespace Revolver.Controls.Movement
 {
     internal class NoMovement : IMovement
     {
-        public MovementManager MovementManager { get; set; }
         public IInputReader InputReader { get; set; }
         public IJump JumpManager { get; set; }
         public IRun RunManager { get; set; }
@@ -19,7 +18,6 @@ namespace Revolver.Controls.Movement
             InputReader = new EmptyReader();
             JumpManager = new NoJump();
             RunManager = new NoRun();
-            MovementManager = new MovementManager();
             GravityStrength = 0;
         }
         public void ResetMovement()

@@ -7,8 +7,8 @@ namespace Revolver.Controls.Reader
 {
     internal class AiReader : IInputReader
     {
-        private Movable self;
-        private Movable tracker;
+        private DynamicObject self;
+        private DynamicObject tracker;
         public Vector2 ReadInput()
         {
             Vector2 direction = Vector2.Zero;
@@ -28,7 +28,7 @@ namespace Revolver.Controls.Reader
             return direction;
         }
 
-        public AiReader(Movable self, Movable tracker = null)
+        public AiReader(DynamicObject self, DynamicObject tracker = null)
         {
             this.self = self;
             this.tracker = tracker;

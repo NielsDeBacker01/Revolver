@@ -10,7 +10,6 @@ namespace Revolver.Controls.Movement
 {
     internal class ShotMovement : IMovement
     {
-        public MovementManager MovementManager { get; set; }
         public IInputReader InputReader { get; set; }
         public IJump JumpManager { get; set; }
         public IRun RunManager { get; set; }
@@ -20,7 +19,6 @@ namespace Revolver.Controls.Movement
             InputReader = new ConstantReader(direction);
             JumpManager = new NoJump();
             RunManager = new quadDirectionalRun(speed, speed, 0f);
-            MovementManager = new MovementManager();
             GravityStrength = 0;
         }
         public void ResetMovement()

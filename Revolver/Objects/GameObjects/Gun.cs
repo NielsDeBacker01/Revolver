@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
 {
-    internal class Gun : Movable
+    internal class Gun : DynamicObject
     {
-        public Movable GunContent { get; set; }
+        public DynamicObject GunContent { get; set; }
         public float ShootCooldown { get; set; }
 
         public Gun(Vector2 position)
@@ -17,14 +17,9 @@ namespace Revolver.Objects.GameObjects
             Movement = new NoMovement();
             Texture = GameStateManager.content.Load<Texture2D>("Gun");
             Facing = new Vector2(0, 0);
-            Width = 50;
-            Height = 50;
             MinPosition = position;
             Weight = 0;
-            Hitboxes = new List<Hitbox>
-            {
-                new Hitbox(50, 20, new Vector2(0, 10))
-            };
+            currentFrame = AnimationManager.getCurrentFrame(status, 0, this, scale);
         }
         public override void Update(GameTime gameTime)
         {
@@ -59,7 +54,7 @@ namespace Revolver.Objects.GameObjects
 
         public override bool Interaction(BaseObject gameObject)
         {
-            if (this.GunContent == null && gameObject.Tags.Contains(Tag.Loadable) && gameObject is Movable movableObject)
+            if (this.GunContent == null && gameObject.Tags.Contains(Tag.Loadable) && gameObject is DynamicObject movableObject)
             {
                 this.GunContent = movableObject;
                 this.GunContent.Movement = new NoMovement

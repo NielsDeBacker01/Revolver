@@ -1,18 +1,25 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Revolver.Interfaces;
 using Revolver.Managers;
 using Revolver.Objects.GameObjects;
+using System.Collections.Generic;
 
 namespace Revolver.Objects
 {
-    internal abstract class Movable : BaseObject
+    internal abstract class DynamicObject : BaseObject
     {
         public IMovement Movement { get; set; }
         public int Weight { get; set; }
+        
         public virtual void Update(GameTime gameTime)
         {
             MovementManager.Move(this, gameTime);
-            foreach (var hitbox in Hitboxes) { hitbox.Flip(this); }
+            if(this is IAnimate)
+            {
+                AnimationManager.updateFrame();
+            }
+            foreach (var hitbox in currentFrame.Hitboxes) { hitbox.Flip(this); }
         }
 
         public bool InteractWith(BaseObject gameObject)
@@ -46,6 +53,8 @@ namespace Revolver.Objects
         }
 
         public abstract bool Interaction(BaseObject gameObject);
+
+
 
     }
 }

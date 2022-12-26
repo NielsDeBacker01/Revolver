@@ -7,7 +7,7 @@ namespace Revolver.Managers
 {
     internal class MovementManager
     {
-        public static void Move(Movable gameObject, GameTime gameTime)
+        public static void Move(DynamicObject gameObject, GameTime gameTime)
         {
             Vector2 afstand = Vector2.Zero;
             if (gameObject.Movement is not NoMovement)

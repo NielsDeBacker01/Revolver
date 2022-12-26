@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Revolver.Objects.GameObjects
 {
-    internal class Bandit : Movable
+    internal class Bandit : DynamicObject
     {
         public float ShootCooldown { get; set; }
 
@@ -27,14 +27,8 @@ namespace Revolver.Objects.GameObjects
             Texture.SetData(new[] { Color.White });
             MinPosition = position;
             Facing = new Vector2(1, 0);
-            Width = 30;
-            Height = 30;
             Weight = 10;
-            Hitboxes = new List<Hitbox>
-            {
-                new Hitbox(30, 30, new Vector2(0, 0)),
-                new Hitbox(20, 10, new Vector2(20, 10))
-            };
+            currentFrame = AnimationManager.getCurrentFrame(status, 0, this, scale);
             ShootCooldown = 1;
         }
 

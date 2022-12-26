@@ -1,17 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Controls.Movement;
+using Revolver.Interfaces;
 using Revolver.Managers;
+using SharpDX.Direct2D1.Effects;
 using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
 {
-    internal class Player : Movable
+    internal class Player : DynamicObject, IAnimate
     {
         private bool delayedInteraction = false;
-        private int scale = 2;
+        public int currentFrameIndex { get; set; }
+
         public Player(Vector2 position)
         {
+            scale = 2;
             Tags = new HashSet<Tag>
             {
                 Tag.Mortal,
@@ -21,22 +25,8 @@ namespace Revolver.Objects.GameObjects
             MinPosition = position;
             Texture = GameStateManager.content.Load<Texture2D>("bulletSheet");
             Facing = new Vector2(1, 0);
-            Width = 12 * scale;
-            Height = 21 * scale;
-            dimensionsX = 12;
-            dimensionsY = 22;
-            spriteX = 6;
-            spriteY = 16;
             Weight = 10;
-            Hitboxes = new List<Hitbox>
-            {
-                new Hitbox(2* scale, 3* scale, new Vector2(1, 2)* scale),
-                new Hitbox(6* scale, 5* scale, new Vector2(3, 0)* scale),
-                new Hitbox(2* scale, 3* scale, new Vector2(9, 2)* scale),
-                new Hitbox(12* scale, 14* scale, new Vector2(0, 5)* scale),
-                new Hitbox(3* scale, 6* scale, new Vector2(1, 15)* scale),
-                new Hitbox(3* scale, 6* scale, new Vector2(9, 15)* scale)
-            };
+            currentFrame = AnimationManager.getCurrentFrame(status, 0, this, scale);
         }
 
         public override void Update(GameTime gameTime)
@@ -61,7 +51,7 @@ namespace Revolver.Objects.GameObjects
 
         public override bool Interaction(BaseObject gameObject)
         {
-            if (gameObject is Goal)
+            if (gameObject is Goal && !GameStateManager.loading)
             {
                 GameStateManager.NextLevel();
                 return false;

@@ -14,6 +14,7 @@ namespace Revolver.Managers
         public static GraphicsDevice graphics;
         public static ContentManager content;
         public static SpriteFont Font;
+        public static bool loading;
         private static List<BaseScene> LevelList = new()
         {
             new TitleScreen(),

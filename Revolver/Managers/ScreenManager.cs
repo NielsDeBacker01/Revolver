@@ -20,6 +20,7 @@ namespace Revolver.Managers
                 //handeld by BaseObject/Movable
                 gElement.Draw(spriteBatch);
             }
+            GameStateManager.loading = false;
         }
 
         internal static void Update(GameTime gameTime)
@@ -33,7 +34,7 @@ namespace Revolver.Managers
                 // TODO: Add your update logic here
                 foreach (BaseObject gObject in GameStateManager.gameObjects.ToList())
                 {
-                    if (gObject is Movable movableObject)
+                    if (gObject is DynamicObject movableObject)
                     {
                         //handeld by Movable
                         movableObject.Update(gameTime);
@@ -44,10 +45,14 @@ namespace Revolver.Managers
 
         internal static void Load()
         {
-            GameStateManager.gameObjects.Clear();
-            GameStateManager.gameElements.Clear();
-            GameStateManager.CurrentScene().LoadScene();
-            GameStateManager.CurrentScene().LoadMap();
+            if (!GameStateManager.loading) 
+            {
+                GameStateManager.loading = true;
+                GameStateManager.gameObjects.Clear();
+                GameStateManager.gameElements.Clear();
+                GameStateManager.CurrentScene().LoadScene();
+                GameStateManager.CurrentScene().LoadMap();
+            }
         }
     }
 }

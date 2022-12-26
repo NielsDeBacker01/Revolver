@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
 {
-    internal class Bullet : Movable
+    internal class Bullet : DynamicObject
     {
-        public Movable Origin;
+        public DynamicObject Origin;
 
-        public Bullet(Vector2 position, Vector2 facing, Movable origin)
+        public Bullet(Vector2 position, Vector2 facing, DynamicObject origin)
         {
             Tags = new HashSet<Tag>
             {
@@ -20,14 +20,9 @@ namespace Revolver.Objects.GameObjects
             Texture = new Texture2D(GameStateManager.graphics, 1, 1);
             Texture.SetData(new[] { Color.White });
             MinPosition = position;
-            Width = 10;
-            Height = 5;
             Weight = 0;
             Movement = new ShotMovement(facing);
-            Hitboxes = new List<Hitbox>
-            {
-                new Hitbox(Width, Height, new Vector2(0, 0))
-            };
+            currentFrame = AnimationManager.getCurrentFrame(status, 0, this, scale);
             Origin = origin;
         }
 
