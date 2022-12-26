@@ -24,7 +24,7 @@ namespace Revolver.Objects
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, new Rectangle((int)MinPosition.X, (int)MinPosition.Y, Width, Height), new Rectangle(spriteX, spriteY, dimensionsX, dimensionsY), Color.White);
-            //foreach (var hitbox in Hitboxes) { spriteBatch.Draw(hitbox.Texture, MinPosition + hitbox.Offset, hitbox.Box, Color.Blue); }
+            foreach (var hitbox in Hitboxes) { spriteBatch.Draw(hitbox.Texture, MinPosition + hitbox.Offset, hitbox.Box, Color.Blue); }
         }
     }
 }

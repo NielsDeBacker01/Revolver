@@ -24,7 +24,7 @@ namespace Revolver.Objects.GameObjects
             Width = 12 * scale;
             Height = 21 * scale;
             dimensionsX = 12;
-            dimensionsY = 21;
+            dimensionsY = 22;
             spriteX = 6;
             spriteY = 16;
             Weight = 10;

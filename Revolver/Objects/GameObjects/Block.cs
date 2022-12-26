@@ -7,6 +7,7 @@ namespace Revolver.Objects.GameObjects
 {
     internal class Block : BaseObject
     {
+        public bool IsWall { get; set; }
         public Block(Vector2 position)
         {
             Texture = GameStateManager.content.Load<Texture2D>("Tileset");

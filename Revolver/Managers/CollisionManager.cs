@@ -193,13 +193,14 @@ namespace Revolver.Managers
 
         public static bool IsTouchingGround(BaseObject gameObject)
         {
-            if (gameObject.MaxPosition.Y == 485)
+            //bottom collision
+            if (gameObject.MaxPosition.Y == ScreenManager.ScreenHeight) 
             {
                 return true;
             }
             foreach (Block block in GameStateManager.gameObjects.OfType<Block>().ToList())
             {
-                if (IsCollidingWithObject(gameObject, block))
+                if (IsCollidingWithObject(gameObject, block) && !block.IsWall)
                 {
                     foreach (Hitbox hitbox in gameObject.Hitboxes)
                     {
