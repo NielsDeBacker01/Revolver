@@ -10,5 +10,6 @@ namespace Revolver.Interfaces
     internal interface IAnimate
     {
         public int currentFrameIndex { get; set; }
+        public int holdFrame { get; set; }
     }
 }

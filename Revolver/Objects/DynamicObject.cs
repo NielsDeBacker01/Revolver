@@ -15,10 +15,6 @@ namespace Revolver.Objects
         public virtual void Update(GameTime gameTime)
         {
             MovementManager.Move(this, gameTime);
-            if(this is IAnimate)
-            {
-                AnimationManager.updateFrame();
-            }
             foreach (var hitbox in currentFrame.Hitboxes) { hitbox.Flip(this); }
         }
 

@@ -28,7 +28,6 @@ namespace Revolver.Objects.GameObjects
             MinPosition = position;
             Facing = new Vector2(1, 0);
             Weight = 10;
-            currentFrame = AnimationManager.getCurrentFrame(status, 0, this, scale);
             ShootCooldown = 1;
         }
 

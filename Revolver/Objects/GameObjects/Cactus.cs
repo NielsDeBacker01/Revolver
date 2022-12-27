@@ -16,7 +16,6 @@ namespace Revolver.Objects.GameObjects
             Texture = GameStateManager.content.Load<Texture2D>("Cactus");
             Facing = new Vector2(0, 0);
             MinPosition = position;
-            currentFrame = AnimationManager.getCurrentFrame(status, 0, this, scale);
         }
     }
 }

@@ -22,7 +22,6 @@ namespace Revolver.Objects.GameObjects
             MinPosition = position;
             Weight = 0;
             Movement = new ShotMovement(facing);
-            currentFrame = AnimationManager.getCurrentFrame(status, 0, this, scale);
             Origin = origin;
         }
 

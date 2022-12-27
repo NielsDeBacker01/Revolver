@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Revolver.Controls.Movement;
 using Revolver.Interfaces;
 using Revolver.Managers;
-using SharpDX.Direct2D1.Effects;
 using System.Collections.Generic;
 
 namespace Revolver.Objects.GameObjects
@@ -12,6 +11,7 @@ namespace Revolver.Objects.GameObjects
     {
         private bool delayedInteraction = false;
         public int currentFrameIndex { get; set; }
+        public int holdFrame { get; set; }
 
         public Player(Vector2 position)
         {
@@ -26,7 +26,6 @@ namespace Revolver.Objects.GameObjects
             Texture = GameStateManager.content.Load<Texture2D>("bulletSheet");
             Facing = new Vector2(1, 0);
             Weight = 10;
-            currentFrame = AnimationManager.getCurrentFrame(status, 0, this, scale);
         }
 
         public override void Update(GameTime gameTime)

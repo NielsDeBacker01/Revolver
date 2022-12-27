@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Controls.Reader;
+using Revolver.Interfaces;
 using Revolver.Objects;
 using System.Linq;
 
@@ -38,6 +39,17 @@ namespace Revolver.Managers
                     {
                         //handeld by Movable
                         movableObject.Update(gameTime);
+                    }
+                    if (gObject is IAnimate animatable)
+                    {
+                        if(animatable.holdFrame <= 0)
+                        {
+                            gObject.currentFrame = AnimationManager.getCurrentFrame(animatable.currentFrameIndex, gObject);
+                        }else
+                        {
+                            animatable.holdFrame--;
+                        }
+                        
                     }
                 }
             }

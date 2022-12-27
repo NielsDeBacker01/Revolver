@@ -19,7 +19,6 @@ namespace Revolver.Objects.GameObjects
             Facing = new Vector2(0, 0);
             MinPosition = position;
             Weight = 0;
-            currentFrame = AnimationManager.getCurrentFrame(status, 0, this, scale);
         }
         public override void Update(GameTime gameTime)
         {

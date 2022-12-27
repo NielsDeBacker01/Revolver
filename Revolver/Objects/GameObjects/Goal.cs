@@ -13,7 +13,6 @@ namespace Revolver.Objects.GameObjects
             Texture.SetData(new[] { Color.White });
             Facing = new Vector2(0, 0);
             MinPosition = position;
-            currentFrame = AnimationManager.getCurrentFrame(status, 0, this, scale);
         }
     }
 }
