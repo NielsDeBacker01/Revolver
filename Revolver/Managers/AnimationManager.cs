@@ -15,20 +15,20 @@ namespace Revolver.Managers
 {
     internal static class AnimationManager
     {
-        public static List<AnimationFrame> PlayerIdle = new List<AnimationFrame>();
-        public static List<AnimationFrame> PlayerWalk = new List<AnimationFrame>();
-        public static List<AnimationFrame> BanditIdle = new List<AnimationFrame>();
-        public static List<AnimationFrame> BanditWalk = new List<AnimationFrame>();
-        public static List<AnimationFrame> BlockIdle = new List<AnimationFrame>();
-        public static List<AnimationFrame> BulletIdle = new List<AnimationFrame>();
-        public static List<AnimationFrame> CactusIdle = new List<AnimationFrame>();
-        public static List<AnimationFrame> GoalIdle = new List<AnimationFrame>();
-        public static List<AnimationFrame> GunIdle = new List<AnimationFrame>();
+        public static List<AnimationFrame> PlayerIdle = new();
+        public static List<AnimationFrame> PlayerWalk = new();
+        public static List<AnimationFrame> BanditIdle = new();
+        public static List<AnimationFrame> BanditWalk = new();
+        public static List<AnimationFrame> BlockIdle = new();
+        public static List<AnimationFrame> BulletIdle = new();
+        public static List<AnimationFrame> CactusIdle = new();
+        public static List<AnimationFrame> GoalIdle = new();
+        public static List<AnimationFrame> GunIdle = new();
 
-        public static AnimationFrame getCurrentFrame(int index, BaseObject requester)
+        public static AnimationFrame GetCurrentFrame(int index, BaseObject requester)
         {
-            status animationtype = requester.status;
-            int scale = requester.scale;
+            status animationtype = requester.Status;
+            float scale = requester.scale;
             AnimationFrame frame = null;
             List<AnimationFrame> selectedList = null;
 
@@ -56,7 +56,7 @@ namespace Revolver.Managers
                             selectedList = BanditIdle;
                             break;
                         case status.Walking:
-                            selectedList = BanditIdle;
+                            selectedList = BanditWalk;
                             break;
                         default:
                             break;
@@ -99,7 +99,7 @@ namespace Revolver.Managers
                     animatable.currentFrameIndex++;
                 }
 
-                animatable.holdFrame = 60 / selectedList.Count;
+                animatable.holdFrame = 30 / selectedList.Count;
             }
 
             //apply scale to hitboxes and return
@@ -108,14 +108,16 @@ namespace Revolver.Managers
                 return frame;
             } else
             {
-                AnimationFrame newframe = new AnimationFrame(frame.Hitboxes, frame.frame.X, frame.frame.Y, frame.frame.Width, frame.frame.Height);
-                newframe.Hitboxes = frame.Hitboxes.ConvertAll(hbox => new Hitbox(hbox.Box.Width, hbox.Box.Height, hbox.Offset));
+                AnimationFrame newframe = new(frame.Hitboxes, frame.frame.X, frame.frame.Y, frame.frame.Width, frame.frame.Height)
+                {
+                    Hitboxes = frame.Hitboxes.ConvertAll(hbox => new Hitbox(hbox.Box.Width, hbox.Box.Height, hbox.Offset))
+                };
                 foreach (Hitbox hitbox in newframe.Hitboxes)
                 {
-                    hitbox.Offset *= 2;
+                    hitbox.Offset *= scale;
                     Rectangle newBox = hitbox.Box;
-                    newBox.Width *= 2;
-                    newBox.Height *= 2;
+                    newBox.Width = (int) (newBox.Width * scale);
+                    newBox.Height = (int) (newBox.Height * scale);
                     hitbox.Box = newBox;
                 }
                 return newframe;
@@ -124,6 +126,7 @@ namespace Revolver.Managers
 
         public static void Load()
         {
+            #region Player
             PlayerIdle.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(2, 3, new Vector2(1, 2)),
@@ -188,17 +191,74 @@ namespace Revolver.Managers
                 new Hitbox(3, 7, new Vector2(1, 16)),
                 new Hitbox(3, 7, new Vector2(9, 16))
             }, 90, 52, 16, 24));
+            #endregion
 
+            #region Bandit
             BanditIdle.Add(new AnimationFrame(new List<Hitbox>
             {
-                new Hitbox(30, 30, new Vector2(0, 0)),
-                new Hitbox(20, 10, new Vector2(20, 10))
-            }, 0, 0, 30, 30));
+                new Hitbox(10, 7, new Vector2(17, 0)),
+                new Hitbox(22, 34, new Vector2(0, 12)),
+                new Hitbox(23, 39, new Vector2(10, 7)),
+                new Hitbox(9, 9, new Vector2(28, 33))
+            }, 6, 5, 40, 45));
 
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
-                new Hitbox(30, 30, new Vector2(0, 0))
-            }, 0, 0, 30, 30));
+                new Hitbox(10, 7, new Vector2(17, 0)),
+                new Hitbox(22, 34, new Vector2(0, 12)),
+                new Hitbox(23, 39, new Vector2(10, 7)),
+                new Hitbox(9, 9, new Vector2(28, 33))
+            }, 6, 5, 40, 45));
+            BanditWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(10, 7, new Vector2(16, 0)),
+                new Hitbox(22, 34, new Vector2(0, 12)),
+                new Hitbox(21, 39, new Vector2(10, 7)),
+            }, 58, 5, 40, 45));
+            BanditWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(10, 7, new Vector2(16, 0)),
+                new Hitbox(22, 34, new Vector2(0, 12)),
+                new Hitbox(20, 39, new Vector2(10, 7)),
+                new Hitbox(4, 5, new Vector2(28, 33)),
+                new Hitbox(7, 8, new Vector2(29, 38))
+            }, 109, 5, 40, 45));
+            BanditWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(10, 7, new Vector2(14, 0)),
+                new Hitbox(22, 34, new Vector2(0, 12)),
+                new Hitbox(18, 39, new Vector2(10, 7)),
+                new Hitbox(12, 6, new Vector2(28, 30))
+            }, 162, 5, 40, 45));
+            BanditWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(10, 7, new Vector2(13, 0)),
+                new Hitbox(22, 34, new Vector2(0, 12)),
+                new Hitbox(21, 39, new Vector2(10, 7)),
+                new Hitbox(11, 9, new Vector2(27, 33))
+            }, 211, 5, 40, 45));
+            BanditWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(10, 7, new Vector2(16, 0)),
+                new Hitbox(22, 34, new Vector2(0, 12)),
+                new Hitbox(21, 39, new Vector2(10, 7)),
+            }, 262, 5, 40, 45));
+            BanditWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(10, 7, new Vector2(17, 0)),
+                new Hitbox(22, 34, new Vector2(0, 12)),
+                new Hitbox(23, 39, new Vector2(10, 7)),
+                new Hitbox(7, 8, new Vector2(29, 38))
+            }, 312, 5, 40, 45));
+            BanditWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(10, 7, new Vector2(17, 0)),
+                new Hitbox(22, 34, new Vector2(0, 12)),
+                new Hitbox(23, 39, new Vector2(10, 7)),
+                new Hitbox(12, 6, new Vector2(28, 31))
+
+            }, 363, 5, 40, 45));
+            #endregion Bandit
 
             BlockIdle.Add(new AnimationFrame(new List<Hitbox>
             {

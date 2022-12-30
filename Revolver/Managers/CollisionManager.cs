@@ -33,11 +33,12 @@ namespace Revolver.Managers
         public static Vector2 ApplyCollision(DynamicObject g1, Vector2 movement, BaseObject g2 = null)
         {
             Vector2 greatestCorrection = Vector2.Zero;
-            foreach (Hitbox hitbox1 in g1.currentFrame.Hitboxes)
+            foreach (Hitbox hitbox1 in g1.CurrentFrame.Hitboxes)
             {
                 Vector2 correction = Vector2.Zero;
                 float x1 = g1.MinPosition.X + hitbox1.Offset.X + movement.X;
                 float y1 = g1.MinPosition.Y + hitbox1.Offset.Y + movement.Y;
+                
                 if (g2 == null)
                 {
                     if (x1 + hitbox1.Box.Width > 800)
@@ -69,53 +70,53 @@ namespace Revolver.Managers
                 }
                 else
                 {
-                    foreach (Hitbox hitbox2 in g2.currentFrame.Hitboxes)
+                    foreach (Hitbox hitbox2 in g2.CurrentFrame.Hitboxes)
                     {
+                        Rectangle h1 = new Rectangle((int)x1, (int)y1, hitbox1.Box.Width, hitbox1.Box.Height);
                         float x2 = g2.MinPosition.X + hitbox2.Offset.X;
                         float y2 = g2.MinPosition.Y + hitbox2.Offset.Y;
-                        if ((x2 <= x1 && x1 < x2 + hitbox2.Box.Width) || (x1 <= x2 && x2 < x1 + hitbox1.Box.Width))
+                        Rectangle h2 = new Rectangle((int)x2, (int)y2, hitbox2.Box.Width, hitbox2.Box.Height);
+
+                        if (h1.Intersects(h2))
                         {
-                            if ((y2 <= y1 && y1 < y2 + hitbox2.Box.Height) || (y1 <= y2 && y2 < y1 + hitbox1.Box.Height))
+                            if (g1.InteractWith(g2))
                             {
-                                if (g1.InteractWith(g2))
+                                correction = Vector2.Zero;
+                                if (movement.X != 0)
                                 {
-                                    correction = Vector2.Zero;
-                                    if (movement.X != 0)
+                                    //left approach
+                                    if (x1 - movement.X + hitbox1.Box.Width <= x2)
                                     {
-                                        //left approach
-                                        if (x1 - movement.X + hitbox1.Box.Width <= x2)
-                                        {
-                                            correction.X = x2 - (x1 + hitbox1.Box.Width);
-                                        }
-                                        //right approach
-                                        else if (x2 + hitbox2.Box.Width <= x1 - movement.X)
-                                        {
-                                            correction.X = x2 + hitbox2.Box.Width - x1;
-                                        }
+                                        correction.X = x2 - (x1 + hitbox1.Box.Width);
                                     }
+                                    //right approach
+                                    else if (x2 + hitbox2.Box.Width <= x1 - movement.X)
+                                    {
+                                        correction.X = x2 + hitbox2.Box.Width - x1;
+                                    }
+                                }
 
-                                    if (movement.Y != 0 && IsCollidingWithObject(g1, g2))
+                                if (movement.Y != 0 && IsCollidingWithObject(g1, g2))
+                                {
+                                    //top approach
+                                    if (y1 - movement.Y <= y2)
                                     {
-                                        //top approach
-                                        if (y1 - movement.Y <= y2)
-                                        {
-                                            correction.Y = y2 - (y1 + hitbox1.Box.Height);
-                                        }
-                                        //bottom approach
-                                        else if (y2 + hitbox2.Box.Height <= y1 - movement.Y)
-                                        {
-                                            correction.Y = y2 + hitbox2.Box.Height - y1;
-                                        }
+                                        correction.Y = y2 - (y1 + hitbox1.Box.Height);
                                     }
+                                    //bottom approach
+                                    else if (y2 + hitbox2.Box.Height <= y1 - movement.Y)
+                                    {
+                                        correction.Y = y2 + hitbox2.Box.Height - y1;
+                                    }
+                                }
 
-                                    if (Math.Abs(correction.X) > Math.Abs(greatestCorrection.X))
-                                    {
-                                        greatestCorrection.X = correction.X;
-                                    }
-                                    if (Math.Abs(correction.Y) > Math.Abs(greatestCorrection.Y))
-                                    {
-                                        greatestCorrection.Y = correction.Y;
-                                    }
+                                if (Math.Abs(correction.X) > Math.Abs(greatestCorrection.X))
+                                {
+                                    greatestCorrection.X = correction.X;
+                                }
+                                if (Math.Abs(correction.Y) > Math.Abs(greatestCorrection.Y))
+                                {
+                                    greatestCorrection.Y = correction.Y;
                                 }
                             }
                         }
@@ -127,7 +128,7 @@ namespace Revolver.Managers
 
         public static bool IsCollidingWithBoundaries(BaseObject gameObject)
         {
-            foreach (Hitbox hitbox in gameObject.currentFrame.Hitboxes)
+            foreach (Hitbox hitbox in gameObject.CurrentFrame.Hitboxes)
             {
                 float x1 = gameObject.MinPosition.X + hitbox.Offset.X;
                 float y1 = gameObject.MinPosition.Y + hitbox.Offset.Y;
@@ -141,12 +142,12 @@ namespace Revolver.Managers
 
         public static bool IsCollidingWithObject(BaseObject g1, BaseObject g2)
         {
-            foreach (Hitbox hitbox1 in g1.currentFrame.Hitboxes)
+            foreach (Hitbox hitbox1 in g1.CurrentFrame.Hitboxes)
             {
                 float x1 = g1.MinPosition.X + hitbox1.Offset.X;
                 float y1 = g1.MinPosition.Y + hitbox1.Offset.Y;
 
-                foreach (Hitbox hitbox2 in g2.currentFrame.Hitboxes)
+                foreach (Hitbox hitbox2 in g2.CurrentFrame.Hitboxes)
                 {
                     float x2 = g2.MinPosition.X + hitbox2.Offset.X;
                     float y2 = g2.MinPosition.Y + hitbox2.Offset.Y;
@@ -199,7 +200,7 @@ namespace Revolver.Managers
                 return true;
             }
 
-            foreach (Hitbox hitbox in gameObject.currentFrame.Hitboxes)
+            foreach (Hitbox hitbox in gameObject.CurrentFrame.Hitboxes)
             {
                 float x1 = gameObject.MinPosition.X + hitbox.Offset.X;
                 float y1 = gameObject.MinPosition.Y + hitbox.Offset.Y;
@@ -213,7 +214,7 @@ namespace Revolver.Managers
             {
                 if (IsCollidingWithObject(gameObject, block) && !block.IsWall)
                 {
-                    foreach (Hitbox hitbox in gameObject.currentFrame.Hitboxes)
+                    foreach (Hitbox hitbox in gameObject.CurrentFrame.Hitboxes)
                     {
                         if (gameObject.MinPosition.Y + hitbox.Box.Height + hitbox.Offset.Y == block.MinPosition.Y)
                         {

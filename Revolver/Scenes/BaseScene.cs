@@ -33,7 +33,7 @@ namespace Revolver.Objects.Scenes
                         if (objAbbreviation[Map[y, x]] != null)
                         {
                             var newObject = objAbbreviation[Map[y, x]].DynamicInvoke(new Vector2(30 * x, 30 * y));
-                            if(y != 0 && newObject is Block newBlock && Map[y-1, x] != "0")
+                            if(y != 0 && newObject is Block newBlock && Map[y - 1, x] != "0")
                             {
                                 newBlock.IsWall = true;
                             }

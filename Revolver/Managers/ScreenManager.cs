@@ -44,7 +44,7 @@ namespace Revolver.Managers
                     {
                         if(animatable.holdFrame <= 0)
                         {
-                            gObject.currentFrame = AnimationManager.getCurrentFrame(animatable.currentFrameIndex, gObject);
+                            gObject.CurrentFrame = AnimationManager.GetCurrentFrame(animatable.currentFrameIndex, gObject);
                         }else
                         {
                             animatable.holdFrame--;

@@ -15,7 +15,7 @@ namespace Revolver.Objects
         public virtual void Update(GameTime gameTime)
         {
             MovementManager.Move(this, gameTime);
-            foreach (var hitbox in currentFrame.Hitboxes) { hitbox.Flip(this); }
+            foreach (var hitbox in CurrentFrame.Hitboxes) { hitbox.Flip(this); }
         }
 
         public bool InteractWith(BaseObject gameObject)
@@ -28,7 +28,7 @@ namespace Revolver.Objects
                     if (!(this is Bandit && gameObject is Cactus))
                     {
                         GameStateManager.Remove(this);
-                        return false;
+                        return true;
                     }
                 }
 

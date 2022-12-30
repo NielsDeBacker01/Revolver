@@ -3,40 +3,67 @@ using Microsoft.Xna.Framework.Graphics;
 using Revolver.Interfaces;
 using Revolver.Managers;
 using Revolver.Objects.GameObjects;
+using SharpDX.Direct3D9;
 using System.Collections.Generic;
+using Revolver.Objects;
+using SharpDX.DirectWrite;
 
 namespace Revolver.Objects
 {
     internal abstract class BaseObject : GameElement
     {
         public Texture2D Texture { get; set; }
-        public int scale = 1;
-        public status status { get; set; } = status.Idle;
+        public float scale = 1;
+        private status status;
+        public status Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                if(status != value)
+                {
+                    if (this is IAnimate animatable) { animatable.currentFrameIndex = 0; }
+                    status = value;
+                }
+            }
+        }
         public new int Width {
             get
             {
-                return currentFrame.frame.Width * scale;
+                return (int)(CurrentFrame.frame.Width * scale);
             }
         }
         public new int Height
         {
             get
             {
-                return currentFrame.frame.Height * scale;
+                return (int)(CurrentFrame.frame.Height * scale);
             }
         }
         public Vector2 Facing { get; set; }
         public HashSet<Tag> Tags { get; set; }
-        public AnimationFrame currentFrame { get; set; }
+        public AnimationFrame CurrentFrame { get; set; }
         public BaseObject()
         {
             GameStateManager.gameObjects.Add(this);
             Tags = new HashSet<Tag>();
-            if(this is Player)
+            switch (this)
             {
-                scale = 2;
+                case Player:
+                    scale = 1.5f;
+                    break;
+                case Bandit:
+                    scale = 1f;
+                    break;
+                default:
+                    break;
             }
-            currentFrame = AnimationManager.getCurrentFrame(0, this);
+            Status = status.Idle;
+            Facing = new Vector2(1,0);
+            CurrentFrame = AnimationManager.GetCurrentFrame(0, this);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -49,15 +76,15 @@ namespace Revolver.Objects
 
             if (Facing.X < 0)
             {
-                spriteBatch.Draw(Texture, new Rectangle((int)MinPosition.X, (int)MinPosition.Y, Width, Height), currentFrame.frame, Color.White);
+                spriteBatch.Draw(Texture, new Rectangle((int)MinPosition.X, (int)MinPosition.Y, Width, Height), CurrentFrame.frame, Color.White);
             }
             else
             {
-                spriteBatch.Draw(Texture, new Rectangle((int)MinPosition.X, (int)MinPosition.Y, Width, Height), currentFrame.frame, Color.White, 0f, new Vector2(), SpriteEffects.FlipHorizontally, 0f);
+                spriteBatch.Draw(Texture, new Rectangle((int)MinPosition.X, (int)MinPosition.Y, Width, Height), CurrentFrame.frame, Color.White, 0f, new Vector2(), SpriteEffects.FlipHorizontally, 0f);
             }
 
             
-            //foreach (var hitbox in currentFrame.Hitboxes) { spriteBatch.Draw(hitbox.Texture, MinPosition + hitbox.Offset, hitbox.Box, Color.Blue); }
+            //foreach (var hitbox in CurrentFrame.Hitboxes) { spriteBatch.Draw(hitbox.Texture, MinPosition + hitbox.Offset, hitbox.Box, Color.Blue); }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Revolver.Controls.Movement;
 using Revolver.Controls.Run;
+using Revolver.Interfaces;
 using Revolver.Objects;
 
 namespace Revolver.Managers
@@ -19,10 +20,12 @@ namespace Revolver.Managers
                 if (direction.X == 0 || direction.X != gameObject.Facing.X)
                 {
                     gameObject.Movement.RunManager.TimeRunning = 0;
+                    if (gameObject is IAnimate) {gameObject.Status = status.Idle;}
                 }
                 else
                 {
                     gameObject.Movement.RunManager.TimeRunning += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if(gameObject is IAnimate) { gameObject.Status = status.Walking; }
                 }
                 if (direction.Y == 0 && !gameObject.Movement.JumpManager.IsJumping)
                 {

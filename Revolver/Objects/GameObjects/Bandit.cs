@@ -1,15 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Controls.Movement;
+using Revolver.Interfaces;
 using Revolver.Managers;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Revolver.Objects.GameObjects
 {
-    internal class Bandit : DynamicObject
+    internal class Bandit : DynamicObject, IAnimate
     {
         public float ShootCooldown { get; set; }
+        public int currentFrameIndex { get; set; }
+        public int holdFrame { get; set; }
 
         public Bandit(Vector2 position)
         {
@@ -23,8 +26,7 @@ namespace Revolver.Objects.GameObjects
                 Movement = new ChasingMovement(this, player);
             }
             Movement ??= new ChasingMovement(this, this);
-            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
-            Texture.SetData(new[] { Color.White });
+            Texture = GameStateManager.content.Load<Texture2D>("bandit");
             MinPosition = position;
             Facing = new Vector2(1, 0);
             Weight = 10;
