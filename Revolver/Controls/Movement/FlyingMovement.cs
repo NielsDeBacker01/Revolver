@@ -21,15 +21,15 @@ namespace Revolver.Controls.Movement
         {
             InputReader = new FlyReader();
             JumpManager = new NoJump();
-            RunManager = new QuadDirectionalRun(3, 4f, 0.1f);
-            GravityStrength = 1;
+            RunManager = new QuadDirectionalRun(3, 4f, 0f);
+            GravityStrength = 0;
         }
         public void ResetMovement()
         {
             JumpManager.AirTime = 0;
             RunManager.TimeRunning = 0;
             JumpManager.IsJumping = false;
-            GravityStrength = 1;
+            GravityStrength = 0;
         }
     }
 }

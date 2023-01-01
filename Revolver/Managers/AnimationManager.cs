@@ -254,7 +254,7 @@ namespace Revolver.Managers
             }, 363, 5, 40, 45));
             #endregion Bandit
 
-            #region bird
+            #region Bird
 
             BirdIdle.Add(new AnimationFrame(new List<Hitbox>
             {

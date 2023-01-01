@@ -15,7 +15,7 @@ namespace Revolver.Objects
             {
                 if (flipped)
                 {
-                    return offsetFlipped;
+                    return offset;
                 }
                 else
                 {

@@ -20,7 +20,17 @@ namespace Revolver.Managers
                 if (direction.X == 0 || direction.X != gameObject.Facing.X)
                 {
                     gameObject.Movement.RunManager.TimeRunning = 0;
-                    if (gameObject is IAnimate) {gameObject.Status = status.Idle;}
+                    if(gameObject is IAnimate)
+                    {
+                        if (direction.Y == 0 && !gameObject.Movement.JumpManager.IsJumping)
+                        {
+                            gameObject.Status = status.Idle;
+                        }
+                        else
+                        {
+                            gameObject.Status = status.Walking;
+                        }
+                    }
                 }
                 else
                 {

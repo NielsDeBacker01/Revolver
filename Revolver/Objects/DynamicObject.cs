@@ -47,8 +47,5 @@ namespace Revolver.Objects
         }
 
         public abstract bool Interaction(BaseObject gameObject);
-
-
-
     }
 }
