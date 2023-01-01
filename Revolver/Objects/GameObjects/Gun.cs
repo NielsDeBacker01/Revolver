@@ -16,7 +16,7 @@ namespace Revolver.Objects.GameObjects
         {
             Movement = new NoMovement();
             Texture = GameStateManager.content.Load<Texture2D>("Gun");
-            Facing = new Vector2(0, 0);
+            Facing = new Vector2(1, 0);
             MinPosition = position;
             Weight = 0;
         }

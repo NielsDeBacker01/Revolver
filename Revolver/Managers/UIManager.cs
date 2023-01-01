@@ -5,7 +5,7 @@ namespace Revolver.Managers
 {
     internal static class UIManager
     {
-        private static UIReader menuControls = new UIReader();
+        private static UIReader menuControls = new();
         private static int Cooldown;
         public static void Update(GameTime gameTime)
         {

@@ -9,8 +9,7 @@ namespace Revolver.Objects.GameObjects
     {
         public Goal(Vector2 position)
         {
-            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
-            Texture.SetData(new[] { Color.White });
+            Texture = GameStateManager.content.Load<Texture2D>("Tileset");
             Facing = new Vector2(0, 0);
             MinPosition = position;
         }

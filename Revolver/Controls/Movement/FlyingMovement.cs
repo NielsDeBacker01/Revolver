@@ -1,32 +1,35 @@
-﻿using Microsoft.Xna.Framework;
-using Revolver.Controls.Jump;
+﻿using Revolver.Controls.Jump;
 using Revolver.Controls.Reader;
 using Revolver.Controls.Run;
 using Revolver.Interface;
 using Revolver.Interfaces;
-using Revolver.Managers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Revolver.Controls.Movement
 {
-    internal class ShotMovement : IMovement
+    internal class FlyingMovement : IMovement
     {
         public IInputReader InputReader { get; set; }
         public IJump JumpManager { get; set; }
         public IRun RunManager { get; set; }
         public int GravityStrength { get; set; }
-        public ShotMovement(Vector2 direction, float speed = 7f)
+        public FlyingMovement()
         {
-            InputReader = new ConstantReader(direction);
+            InputReader = new FlyReader();
             JumpManager = new NoJump();
-            RunManager = new QuadDirectionalRun(speed, speed, 0f);
-            GravityStrength = 0;
+            RunManager = new QuadDirectionalRun(3, 4f, 0.1f);
+            GravityStrength = 1;
         }
         public void ResetMovement()
         {
             JumpManager.AirTime = 0;
             RunManager.TimeRunning = 0;
             JumpManager.IsJumping = false;
-            GravityStrength = 0;
+            GravityStrength = 1;
         }
     }
 }

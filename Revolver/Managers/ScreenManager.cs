@@ -11,7 +11,6 @@ namespace Revolver.Managers
     {
         public static int ScreenWidth { get; set; }
         public static int ScreenHeight { get; set; }
-        private static UIReader menuController = new UIReader();
 
         internal static void Draw(SpriteBatch spriteBatch)
         {
@@ -45,11 +44,11 @@ namespace Revolver.Managers
                         if(animatable.holdFrame <= 0)
                         {
                             gObject.CurrentFrame = AnimationManager.GetCurrentFrame(animatable.currentFrameIndex, gObject);
+                            gObject.MinPosition = new Vector2(gObject.MinPosition.X, gObject.MinPosition.Y + 1);
                         }else
                         {
                             animatable.holdFrame--;
                         }
-                        
                     }
                 }
             }

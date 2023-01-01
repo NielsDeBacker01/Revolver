@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Revolver.Controls.Run
 {
-    internal class quadDirectionalRun : IRun
+    internal class QuadDirectionalRun : IRun
     {
         public float TimeRunning { get; set; }
         public float Speed { get; set; }
         public float SpeedCap { get; set; }
         public float Acceleration { get; set; }
 
-        public quadDirectionalRun(float Speed, float SpeedCap, float Acceleration)
+        public QuadDirectionalRun(float Speed, float SpeedCap, float Acceleration)
         {
             TimeRunning = 0;
             this.Speed = Speed;

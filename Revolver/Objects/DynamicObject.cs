@@ -1,9 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Revolver.Interfaces;
 using Revolver.Managers;
 using Revolver.Objects.GameObjects;
-using System.Collections.Generic;
 
 namespace Revolver.Objects
 {
@@ -11,7 +9,7 @@ namespace Revolver.Objects
     {
         public IMovement Movement { get; set; }
         public int Weight { get; set; }
-        
+
         public virtual void Update(GameTime gameTime)
         {
             MovementManager.Move(this, gameTime);

@@ -53,10 +53,13 @@ namespace Revolver.Objects
             switch (this)
             {
                 case Player:
-                    scale = 1.5f;
+                    scale = 2f;
                     break;
                 case Bandit:
-                    scale = 1f;
+                    scale = 0.7f;
+                    break;
+                case Goal:
+                    scale = 30f / 52f;
                     break;
                 default:
                     break;
@@ -84,7 +87,7 @@ namespace Revolver.Objects
             }
 
             
-            //foreach (var hitbox in CurrentFrame.Hitboxes) { spriteBatch.Draw(hitbox.Texture, MinPosition + hitbox.Offset, hitbox.Box, Color.Blue); }
+            //foreach (var hitbox in CurrentFrame.Hitboxes) { spriteBatch.Draw(hitbox.Texture, this.MinPosition + hitbox.Offset, hitbox.Box, Color.Blue); }
         }
     }
 }

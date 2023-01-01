@@ -19,6 +19,8 @@ namespace Revolver.Managers
         public static List<AnimationFrame> PlayerWalk = new();
         public static List<AnimationFrame> BanditIdle = new();
         public static List<AnimationFrame> BanditWalk = new();
+        public static List<AnimationFrame> BirdIdle = new();
+        public static List<AnimationFrame> BirdWalk = new();
         public static List<AnimationFrame> BlockIdle = new();
         public static List<AnimationFrame> BulletIdle = new();
         public static List<AnimationFrame> CactusIdle = new();
@@ -62,6 +64,21 @@ namespace Revolver.Managers
                             break;
                     }
                     break;
+
+                case Bird:
+                    switch (animationtype)
+                    {
+                        case status.Idle:
+                            selectedList = BirdIdle;
+                            break;
+                        case status.Walking:
+                            selectedList = BirdWalk;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+
 
                 case Block:
                     selectedList = BlockIdle;
@@ -132,133 +149,161 @@ namespace Revolver.Managers
                 new Hitbox(2, 3, new Vector2(1, 2)),
                 new Hitbox(6, 5, new Vector2(3, 0)),
                 new Hitbox(2, 3, new Vector2(9, 2)),
-                new Hitbox(12, 15, new Vector2(0, 5)),
-                new Hitbox(3, 7, new Vector2(1, 16)),
-                new Hitbox(3, 7, new Vector2(9, 16))
-            }, 6, 16, 12, 23));
+                new Hitbox(12, 19, new Vector2(0, 5)),
+            }, 6, 16, 15, 24));
 
-            PlayerWalk.Add(new AnimationFrame(new List<Hitbox>
-            {
-                new Hitbox(2, 3, new Vector2(1, 3)),
-                new Hitbox(6, 5, new Vector2(3, 1)),
-                new Hitbox(2, 3, new Vector2(9, 3)),
-                new Hitbox(12, 15, new Vector2(0, 6)),
-                new Hitbox(3, 7, new Vector2(1, 17)),
-                new Hitbox(3, 7, new Vector2(9, 17))
-            }, 6, 52, 12, 24));
             PlayerWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(2, 3, new Vector2(1, 2)),
                 new Hitbox(6, 5, new Vector2(3, 0)),
                 new Hitbox(2, 3, new Vector2(9, 2)),
-                new Hitbox(12, 15, new Vector2(0, 5)),
-                new Hitbox(3, 7, new Vector2(1, 16)),
-                new Hitbox(3, 7, new Vector2(9, 16))
+                new Hitbox(12, 19, new Vector2(0, 5)),
+            }, 6, 52, 15, 24));
+            PlayerWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(2, 3, new Vector2(1, 2)),
+                new Hitbox(6, 5, new Vector2(3, 0)),
+                new Hitbox(2, 3, new Vector2(9, 2)),
+                new Hitbox(12, 19, new Vector2(0, 5)),
             }, 21, 52, 15, 24));
             PlayerWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(2, 3, new Vector2(1, 2)),
                 new Hitbox(6, 5, new Vector2(3, 0)),
                 new Hitbox(2, 3, new Vector2(9, 2)),
-                new Hitbox(12, 15, new Vector2(0, 5)),
-                new Hitbox(3, 7, new Vector2(1, 16)),
-                new Hitbox(3, 7, new Vector2(9, 16))
+                new Hitbox(12, 19, new Vector2(0, 5)),
             }, 39, 52, 15, 24));
             PlayerWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(2, 3, new Vector2(1, 2)),
                 new Hitbox(6, 5, new Vector2(3, 0)),
                 new Hitbox(2, 3, new Vector2(9, 2)),
-                new Hitbox(12, 15, new Vector2(0, 5)),
-                new Hitbox(3, 7, new Vector2(1, 16)),
-                new Hitbox(3, 7, new Vector2(9, 16))
-            }, 57, 52, 12, 24));
+                new Hitbox(12, 19, new Vector2(0, 5)),
+            }, 57, 52, 15, 24));
             PlayerWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(2, 3, new Vector2(1, 2)),
                 new Hitbox(6, 5, new Vector2(3, 0)),
                 new Hitbox(2, 3, new Vector2(9, 2)),
-                new Hitbox(12, 15, new Vector2(0, 5)),
-                new Hitbox(3, 7, new Vector2(1, 16)),
-                new Hitbox(3, 7, new Vector2(9, 16))
+                new Hitbox(12, 19, new Vector2(0, 5)),
             }, 72, 52, 15, 24));
             PlayerWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(2, 3, new Vector2(1, 2)),
                 new Hitbox(6, 5, new Vector2(3, 0)),
                 new Hitbox(2, 3, new Vector2(9, 2)),
-                new Hitbox(12, 15, new Vector2(0, 5)),
-                new Hitbox(3, 7, new Vector2(1, 16)),
-                new Hitbox(3, 7, new Vector2(9, 16))
-            }, 90, 52, 16, 24));
+                new Hitbox(12, 19, new Vector2(0, 5)),
+            }, 90, 52, 15, 24));
             #endregion
 
             #region Bandit
             BanditIdle.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(17, 0)),
-                new Hitbox(22, 34, new Vector2(0, 12)),
-                new Hitbox(23, 39, new Vector2(10, 7)),
+                new Hitbox(33, 39, new Vector2(0, 7)),
                 new Hitbox(9, 9, new Vector2(28, 33))
             }, 6, 5, 40, 45));
 
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(17, 0)),
-                new Hitbox(22, 34, new Vector2(0, 12)),
-                new Hitbox(23, 39, new Vector2(10, 7)),
+                new Hitbox(33, 39, new Vector2(0, 7)),
                 new Hitbox(9, 9, new Vector2(28, 33))
             }, 6, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(16, 0)),
-                new Hitbox(22, 34, new Vector2(0, 12)),
-                new Hitbox(21, 39, new Vector2(10, 7)),
+                new Hitbox(33, 39, new Vector2(0, 7))
             }, 58, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(16, 0)),
-                new Hitbox(22, 34, new Vector2(0, 12)),
-                new Hitbox(20, 39, new Vector2(10, 7)),
+                new Hitbox(33, 39, new Vector2(0, 7)),
                 new Hitbox(4, 5, new Vector2(28, 33)),
                 new Hitbox(7, 8, new Vector2(29, 38))
             }, 109, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(14, 0)),
-                new Hitbox(22, 34, new Vector2(0, 12)),
-                new Hitbox(18, 39, new Vector2(10, 7)),
+                new Hitbox(33, 39, new Vector2(0, 7)),
                 new Hitbox(12, 6, new Vector2(28, 30))
             }, 162, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(13, 0)),
-                new Hitbox(22, 34, new Vector2(0, 12)),
-                new Hitbox(21, 39, new Vector2(10, 7)),
+                new Hitbox(33, 39, new Vector2(0, 7)),
                 new Hitbox(11, 9, new Vector2(27, 33))
             }, 211, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(16, 0)),
-                new Hitbox(22, 34, new Vector2(0, 12)),
-                new Hitbox(21, 39, new Vector2(10, 7)),
+                new Hitbox(33, 39, new Vector2(0, 7))
             }, 262, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(17, 0)),
-                new Hitbox(22, 34, new Vector2(0, 12)),
-                new Hitbox(23, 39, new Vector2(10, 7)),
+                new Hitbox(33, 39, new Vector2(0, 7)),
                 new Hitbox(7, 8, new Vector2(29, 38))
             }, 312, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(17, 0)),
-                new Hitbox(22, 34, new Vector2(0, 12)),
-                new Hitbox(23, 39, new Vector2(10, 7)),
+                new Hitbox(33, 39, new Vector2(0, 7)),
                 new Hitbox(12, 6, new Vector2(28, 31))
 
             }, 363, 5, 40, 45));
             #endregion Bandit
+
+            #region bird
+
+            BirdIdle.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(13, 14, new Vector2(8, 10)),
+                new Hitbox(21, 10, new Vector2(7, 0))
+            }, 1, 1, 32, 28));
+
+            BirdWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(13, 14, new Vector2(8, 10)),
+                new Hitbox(21, 10, new Vector2(7, 0))
+            }, 1, 1, 32, 28));
+            BirdWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(13, 14, new Vector2(8, 10)),
+                new Hitbox(21, 10, new Vector2(7, 0))
+            }, 37, 1, 32, 28));
+            BirdWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(13, 14, new Vector2(8, 10)),
+                new Hitbox(21, 10, new Vector2(7, 0))
+            }, 73, 1, 32, 28));
+            BirdWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(13, 14, new Vector2(8, 10))
+            }, 109, 1, 32, 28));
+            BirdWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(13, 14, new Vector2(8, 10))
+            }, 145, 1, 32, 28));
+            BirdWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(13, 14, new Vector2(8, 10))
+            }, 181, 1, 32, 28));
+            BirdWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(13, 14, new Vector2(8, 10))
+            }, 217, 1, 32, 28));
+            BirdWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(13, 14, new Vector2(8, 10))
+            }, 253, 1, 32, 28));
+            BirdWalk.Add(new AnimationFrame(new List<Hitbox>
+            {
+                new Hitbox(13, 14, new Vector2(8, 10)),
+                new Hitbox(26, 3, new Vector2(2, 7))
+            }, 289, 1, 32, 28));
+
+            #endregion
 
             BlockIdle.Add(new AnimationFrame(new List<Hitbox>
             {
@@ -277,8 +322,8 @@ namespace Revolver.Managers
 
             GoalIdle.Add(new AnimationFrame(new List<Hitbox>
             {
-                new Hitbox(30, 30, new Vector2(0, 0))
-            }, 0, 0, 30, 30));
+                new Hitbox(52, 52, new Vector2(0, 0))
+            }, 710, 204, 52, 52));
 
             GunIdle.Add(new AnimationFrame(new List<Hitbox>
             {

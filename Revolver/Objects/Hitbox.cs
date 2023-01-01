@@ -15,7 +15,7 @@ namespace Revolver.Objects
             {
                 if (flipped)
                 {
-                    return this.offset + new Vector2(parentWidth - this.Box.Width - 2 * (this.offset.X), 0);
+                    return offsetFlipped;
                 }
                 else
                 {
@@ -29,8 +29,8 @@ namespace Revolver.Objects
         }
         public Texture2D Texture { get; set; }
         private Vector2 offset;
+        private Vector2 offsetFlipped;
         private bool flipped;
-        private int parentWidth;
 
         public Hitbox(int width, int height, Vector2 offset)
         {
@@ -39,7 +39,7 @@ namespace Revolver.Objects
             Texture = new Texture2D(GameStateManager.graphics, 1, 1);
             Texture.SetData(new[] { Color.White });
             flipped = false;
-            
+            offsetFlipped = Vector2.Zero;
         }
 
         public void Flip(DynamicObject parent)
@@ -47,7 +47,10 @@ namespace Revolver.Objects
             if (parent.Facing.X > 0)
             {
                 flipped = true;
-                parentWidth = parent.Width;
+                if(offsetFlipped.Y == 0)
+                {
+                    offsetFlipped = this.offset + new Vector2(parent.Width - this.Box.Width - 2 * (this.offset.X), 1);
+                }
             }
             else if (parent.Facing.X < 0)
             {

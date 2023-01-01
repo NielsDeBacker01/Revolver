@@ -49,7 +49,7 @@ namespace Revolver.Managers
                 Speed.X = gameObject.Movement.RunManager.CalculateRun();
 
                 //jump logic
-                if (gameObject.Movement.RunManager is not quadDirectionalRun)
+                if (gameObject.Movement.RunManager is not QuadDirectionalRun)
                 {
                     //normal jump calculation
                     if (CollisionManager.IsTouchingGround(gameObject))
