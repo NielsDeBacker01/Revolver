@@ -14,7 +14,7 @@ namespace Revolver.Controls.Reader
         private int timeMoving;
         public Vector2 ReadInput()
         {
-            if(timeMoving > 50)
+            if(timeMoving > 30)
             {
                 direction *= -1;
                 timeMoving = 0;

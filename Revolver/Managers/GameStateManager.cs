@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Revolver.Objects;
 using Revolver.Objects.Scenes;
+using Revolver.Scenes;
 using System.Collections.Generic;
 
 namespace Revolver.Managers
@@ -20,9 +21,13 @@ namespace Revolver.Managers
             new TitleScreen(),
             new Level1(),
             new Level2(),
+            new Level3(),
+            new Level4(),
+            new Level5(),
             new GameOverScene()
         };
         public static int LevelIndex = 0;
+        private static int currentLevel;
         public static BaseScene CurrentScene()
         {
             return LevelList[LevelIndex];
@@ -31,16 +36,26 @@ namespace Revolver.Managers
         {
             if (index < 0)
             {
-                LevelIndex++;
+                if (LevelIndex == 5)
+                {
+                    LevelIndex = 0;
+                } else 
+                if (LevelIndex == 6) 
+                {
+                    LevelIndex = currentLevel;
+                } else
+                {
+                    LevelIndex++;
+                }
+            }
+            else if (index == 6)
+            {
+                currentLevel = LevelIndex;
+                LevelIndex = index;
             }
             else
             {
                 LevelIndex = index;
-            }
-
-            if (LevelIndex < 0 || LevelIndex >= LevelList.Count)
-            {
-                LevelIndex = 0;
             }
 
             ScreenManager.Load();

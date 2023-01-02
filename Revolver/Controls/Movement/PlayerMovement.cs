@@ -16,7 +16,7 @@ namespace Revolver.Controls.Movement
         public PlayerMovement()
         {
             InputReader = new KeyboardReader();
-            JumpManager = new StandardParabolicJump(120, 0.75f);
+            JumpManager = new StandardParabolicJump(100, 0.75f);
             RunManager = new Standard2DRun(8, 12f, 0.1f);
             GravityStrength = 1;
         }

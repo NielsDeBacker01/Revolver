@@ -17,8 +17,7 @@ namespace Revolver.Objects.GameObjects
                 Tag.Deadly
             };
 
-            Texture = new Texture2D(GameStateManager.graphics, 1, 1);
-            Texture.SetData(new[] { Color.White });
+            Texture = GameStateManager.content.Load<Texture2D>("bullet");
             MinPosition = position;
             Weight = 0;
             Movement = new ShotMovement(facing);

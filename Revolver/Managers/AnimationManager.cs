@@ -200,15 +200,13 @@ namespace Revolver.Managers
             BanditIdle.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(17, 0)),
-                new Hitbox(33, 39, new Vector2(0, 7)),
-                new Hitbox(9, 9, new Vector2(28, 33))
+                new Hitbox(33, 39, new Vector2(0, 7))
             }, 6, 5, 40, 45));
 
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(17, 0)),
-                new Hitbox(33, 39, new Vector2(0, 7)),
-                new Hitbox(9, 9, new Vector2(28, 33))
+                new Hitbox(33, 39, new Vector2(0, 7))
             }, 6, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
@@ -218,21 +216,17 @@ namespace Revolver.Managers
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(16, 0)),
-                new Hitbox(33, 39, new Vector2(0, 7)),
-                new Hitbox(4, 5, new Vector2(28, 33)),
-                new Hitbox(7, 8, new Vector2(29, 38))
+                new Hitbox(33, 39, new Vector2(0, 7))
             }, 109, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(14, 0)),
-                new Hitbox(33, 39, new Vector2(0, 7)),
-                new Hitbox(12, 6, new Vector2(28, 30))
+                new Hitbox(33, 39, new Vector2(0, 7))
             }, 162, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(13, 0)),
-                new Hitbox(33, 39, new Vector2(0, 7)),
-                new Hitbox(11, 9, new Vector2(27, 33))
+                new Hitbox(33, 39, new Vector2(0, 7))
             }, 211, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
@@ -242,14 +236,12 @@ namespace Revolver.Managers
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(17, 0)),
-                new Hitbox(33, 39, new Vector2(0, 7)),
-                new Hitbox(7, 8, new Vector2(29, 38))
+                new Hitbox(33, 39, new Vector2(0, 7))
             }, 312, 5, 40, 45));
             BanditWalk.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 7, new Vector2(17, 0)),
-                new Hitbox(33, 39, new Vector2(0, 7)),
-                new Hitbox(12, 6, new Vector2(28, 31))
+                new Hitbox(33, 39, new Vector2(0, 7))
 
             }, 363, 5, 40, 45));
             #endregion Bandit
@@ -313,7 +305,7 @@ namespace Revolver.Managers
             BulletIdle.Add(new AnimationFrame(new List<Hitbox>
             {
                 new Hitbox(10, 5, new Vector2(0, 0))
-            }, 0, 0, 10, 5));
+            }, 110, 65, 10, 5));
 
             CactusIdle.Add(new AnimationFrame(new List<Hitbox>
             {

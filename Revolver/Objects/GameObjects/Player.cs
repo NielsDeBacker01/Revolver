@@ -94,7 +94,7 @@ namespace Revolver.Objects.GameObjects
                 Tag.Mortal,
                 Tag.Loadable
             };
-            GameStateManager.NextLevel(3);
+            GameStateManager.NextLevel(6);
         }
     }
 }
